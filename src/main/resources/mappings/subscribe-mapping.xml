@@ -14,67 +14,69 @@
 		<result property="treeReq" column="TREE_REQ"/>
 	</resultMap>
 	
-	<!-- 씨앗(seed) --> 
+<!-- 씨앗(seed) --> 
+   
+   <insert id="insertSub_seed">
+   <![CDATA[
+      INSERT INTO SUB_SEED(SUB_ID, SUB_USER, TAG_TASTE, TAG_CAFF, TAG_EFFECT)
+      VALUES((SELECT NVL(MAX(SUB_ID), 0) + 1 FROM SUB_SEED), #{subUser}, #{tagTaste}, #{tagCaff}, #{tagEffect})
+   ]]>
+   </insert>
+   
+   
+   <update id="updateSub_seed">
+      <![CDATA[
+      UPDATE SUB_SEED 
+      SET TAG_TASTE = #{tagTaste}, TAG_CAFF = #{tagCaff}, TAG_EFFECT = #{tagEffect}
+      WHERE SUB_USER = #{subUser}
+      ]]>
+   </update>
+   
+   <delete id="deleteSub_seed">
+   <![CDATA[
+      DELETE SUB_SEED 
+      WHERE SUB_USER = #{subUser}
+   ]]>
+   </delete>   
+   
+   <select id="getSub_seed" resultType="sub">
+      <![CDATA[
+      SELECT * FROM SUB_SEED 
+      WHERE SUB_USER = #{subUser}
+      ]]>
+   </select>
 	
-<!-- 	<insert id="insertSub_seed">
-	<![CDATA[
-		INSERT INTO SUB_SEED(SS_ID, ORDER_CATE, SS_USER, SS_DATE, SS_PRICE, TAG_TASTE, TAG_CAFE, TAG_EFFECT)
-		VALUES((SELECT NVL(MAX(SS_ID), 0) + 1 FROM SUB_SEED), #{cate}, #{user}, 20210621, 19900, #{taste}, #{caffeine}, #{effect})
-	]]>
-	</insert>
-	
-	<update id="updateSub_seed">
-		<![CDATA[
-		UPDATE SUB_SEED 
-		SET SS_DATE = #{date}, TAG_TASTE = #{taste}, TAG_CAFE = #{caffeine}, TAG_EFFECT = #{effect}
-		WHERE SS_ID = #{id}
-		]]>
-	</update>
-	
-	<delete id="deleteSub_seed">
-	<![CDATA[
-		DELETE SUB_SEED 
-		WHERE SS_ID = #{id}
-	]]>
-	</delete>	
-	
-	<select id="getSub_seed" resultType="sub">
-		<![CDATA[
-		SELECT * FROM SUB_SEED 
-		WHERE SS_ID = #{id}
-		]]>
-	</select> -->
-	
-	<!-- 새싹(leaf) --> 
-	
-<!-- 	<insert id="insertSub_leaf">
-	<![CDATA[
-		INSERT INTO SUB_LEAF(SL_ID, ORDER_CATE, SL_USER, SL_DATE, SL_PRICE, TAG_SEASON, TAG_BASE, TAG_DRINK, TAG_BLEND)
-		VALUES((SELECT NVL(MAX(SL_ID), 0) + 1 FROM SUB_LEAF), #{cate}, #{user}, #{date}, 29900, #{season}, #{base}, #{drink}, #{blend})
-	]]>
-	</insert>
-	
-	<update id="updateSub_leaf">
-		<![CDATA[
-		UPDATE SUB_LEAF 
-		SET SL_DATE = TAG_SEASON = #{season}, TAG_BASE = #{base}, TAG_DRINK = #{drink}, TAG_BLEND = #{blend}
-		WHERE SL_ID = #{id}
-		]]>
-	</update>
-	
-	<delete id="deleteSub_leaf">
-	<![CDATA[
-		DELETE SUB_LEAF 
-		WHERE SL_ID = #{id}
-	]]>
-	</delete>	
-	
-	<select id="getSub_leaf" resultType="sub">
-		<![CDATA[
-		SELECT * FROM SUB_LEAF 
-		WHERE SL_ID = #{id}
-		]]>
-	</select> -->
+<!-- 새싹(leaf) --> 
+   
+   <insert id="insertSub_leaf">
+   <![CDATA[
+      INSERT INTO SUB_LEAF(SUB_ID, SUB_USER, TAG_SEASON, TAG_BASE, TAG_DRINK, TAG_BLEND)
+      VALUES((SELECT NVL(MAX(SUB_ID), 0) + 1 FROM SUB_LEAF), #{subUser}, #{tagSeason}, #{tagBase}, #{tagDrink}, #{tagBlend})
+   ]]>
+   </insert>
+   
+   <update id="updateSub_leaf">
+      <![CDATA[
+      UPDATE SUB_LEAF 
+      SET TAG_SEASON = #{tagSeason}, TAG_BASE = #{tagBase}, TAG_DRINK = #{tagDrink}, TAG_BLEND = #{tagBlend}
+      WHERE SUB_USER = #{subUser}
+      ]]>
+   </update>
+   
+   <delete id="deleteSub_leaf">
+   <![CDATA[
+      DELETE SUB_LEAF 
+      WHERE SUB_USER = #{subUser}
+   ]]>
+   </delete>   
+   
+   <select id="getSub_leaf" resultType="sub">
+      <![CDATA[
+      SELECT * FROM SUB_LEAF 
+      WHERE SUB_USER = #{subUser}
+      ]]>
+   </select>
+   
 	
 	<!-- 나무(tree) --> 
 	
@@ -100,7 +102,7 @@
 	]]>
 	</delete>	
 	
-	<select id="getSub_tree" resultType="sub" resultMap="subTreeList">
+	<select id="getSub_tree" resultType="sub" >
 		<![CDATA[
 		SELECT * FROM SUB_TREE
 		WHERE SUB_USER = #{subUser}

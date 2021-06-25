@@ -41,11 +41,13 @@ public class TreeController {
 //		return "redirect:getSubTree.do"; // 구독 완료 후 보여줄 화면
 	}
 	
-	@RequestMapping("/updateSubTree.do")
-	public String updateSub(SubVO vo) throws IOException{
+    @RequestMapping(value="/updateSubTree.do", produces="application/json; charset=utf8")
+    @ResponseBody
+    public String updateSub(SubVO vo) throws IOException{
 		treeService.updateSub(vo);
 		System.out.println("구독이 수정 되었습니다.");
-		return "redirect:getSubTree.do";
+		return "나무 구독이 수정되었습니다.";
+		/* return "redirect:getSubTree.do"; */
 	}
 	
 	@RequestMapping("/deleteSubTree.do")

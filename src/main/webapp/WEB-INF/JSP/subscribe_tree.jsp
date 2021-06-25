@@ -3,6 +3,10 @@
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% 
+	String data =  request.getParameter("data"); //data 를 String 으로 변환 
+%> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 					   "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -107,7 +111,7 @@
                             <img src="./assets/images/tree/tt_${tea.ttId}.png" alt="${tea.ttName}" class="tt_thum_img">
                           </div>
                           <div class="tt_info">
-                            <input type="checkbox" value="${tea.ttId}" name="treeSelect" id="tt_${tea.ttId}" class="tt_base">
+                            <input type="checkbox" value="${tea.ttName}" name="treeSelect" id="tt_${tea.ttId}" class="tt_base">
                             <p class="tt_name"> ${tea.ttName} </p>
                             <p class="tt_explain"> ${tea.ttInfo} </p>
                           </div>
@@ -141,7 +145,7 @@
                             <img src="./assets/images/tree/tt_${tea.ttId}.png" alt="${tea.ttName}" class="tt_thum_img">
                           </div>
                           <div class="tt_info">
-                            <input type="checkbox" value="${tea.ttId}" name="treeSelect" id="tt_${tea.ttId}" class="tt_blend">
+                            <input type="checkbox" value="${tea.ttName}" name="treeSelect" id="tt_${tea.ttId}" class="tt_blend">
                             <p class="tt_name"> ${tea.ttName} </p>
                             <p class="tt_explain"> ${tea.ttInfo} </p>
                           </div>
@@ -171,7 +175,7 @@
                             <img src="./assets/images/tree/tt_${tea.ttId}.png" alt="${tea.ttName}" class="tt_thum_img">
                           </div>
                           <div class="tt_info">
-                            <input type="checkbox" value="${tea.ttId}" name="treeAdd" id="tt_${tea.ttId}" class="tt_add">
+                            <input type="checkbox" value="${tea.ttName}" name="treeAdd" id="tt_${tea.ttId}" class="tt_add">
                             <p class="tt_name"> ${tea.ttName} </p> 
                             <input type="hidden" value="${tea.ttPrice}" id="price${tea.ttId}"/>
                             <p class="tt_price">${tea.ttPrice}원 </p>
@@ -192,7 +196,7 @@
                   <p class="sub_tree_title">요청사항</p>
                   <p style="font-size:1.2rem;">알레르기 여부 등 요청사항이 있으면 작성해주세요.</p>
                 <div>
-                  <textarea placeholder="요청사항을 입력해주세요" name="treeReq" value=""> </textarea>
+                  <textarea placeholder="요청사항을 입력해주세요" name="treeReq" value="" id="treeReq"> </textarea>
                 </div>
               </div>
              
@@ -208,9 +212,9 @@
                 <br />
                 <br />
                 <br />
-                <button type="button" id="btn_submit" 
-                class="btn btn_primary text-uppercase" onclick="submitChkCount();">
-                나무 구독 신청</button>
+                <input type="button" id="btn_subSubmit" value="구독 신청"
+                class="btn btn_primary text-uppercase" onclick="inORUp();">
+               </input>
               </div>
             </div>
             </form>
@@ -242,10 +246,74 @@
     var addprice = 0;
 
     $(document).ready(function () {
+    	
       //각각 체크박스를 클릭시 체크 알아보게 변화
-      $("input:checked").each(function () {
-        // chkGoodsList.push($(this).val());
-      });
+      $("input:checkbox").on("click", function () {
+      // chkGoodsList.push($(this).val());
+      if($(this).is(":checked") == true){
+        $(this).parents('li').addClass('selected');
+      } else {
+        $(this).parents('li').removeClass('selected');
+      }
+      //
+      // return false;
+      // $(this).parents('li').toggleClass('selected');
+    });
+      
+      
+
+      // 업데이트 시 기존 사용자의 선택 불러오기
+      var data = <%=data%>;
+      console.log(data);
+      
+      if(data != null){
+    	  //stirng을 다시 JSON 객체로 변환
+    	  var obj = JSON.parse(data);
+    	  console.log(obj);
+    	  
+    	  var treeSelect = obj['subInfo'].treeSelect.split(',');
+    	  var treeAdd = obj['subInfo'].treeAdd.split(',');
+    	  //treeAdd = treeAdd.split(',');
+    	  var treeReq = obj['subInfo'].treeReq;
+    	  var subPrice = obj['subInfo'].subPrice;
+    	  
+    	  console.log(treeSelect);
+    	  console.log(treeAdd);
+    	  console.log(treeReq);
+    	  console.log(subPrice);
+
+    	  $('#treeReq').val(treeReq);
+    	  $('#totalPrice').val(subPrice);
+    	  
+    	  $('input:checkbox[name="treeSelect"]').each(function(){
+    		  for(var i=0 ; i< treeSelect.length ; i++){    			  
+	    		  if(this.value == treeSelect[i]){
+	    			  this.checked = true;
+	    		  }
+    		  } 
+    		});
+    	  
+		  $('input:checkbox[name="treeAdd"]').each(function(){
+				for(var i=0; i<treeAdd.length ;i++){    			  
+		    		  if(this.value == treeAdd[i] ){
+		    			  this.checked = true;
+		    		  }
+	    		  } 				
+			});    	  
+    	  
+      }
+      
+      // insert와 update 구분
+      
+      
+      if(data == null){
+ 		  //사용자가 보낸 값이 없으면 - insert
+ 		  $("#btn_subSubmit").val("나무 구독하기")
+      } else {
+    	  //사용자가 보낸 값이 있으면 - update
+    	  $("#btn_subSubmit").val("나무 구독수정")  
+      }
+      
 
       // 베이스 선택
       $("input:checkbox[name='treeSelect']").on("click", function () {
@@ -311,13 +379,30 @@
     });
     
     /* 함수 */
+    
+  
 
-    function submitChkCount() {
+    function inORUp(){
+    	var data = <%=data%>;
+    	if(data == null) {
+    		// 사용자가 보낸 정보가 없으면 insert
+    		var insert = 'insertSubTree.do'
+    		submitChkCount(insert);
+    		
+    	} else {
+    		// 사용자가 보낸 정보가 있으면 update
+    		var update = 'updateSubTree.do'
+    		submitChkCount(update);
+    	}
+    	
+    }
+    
+    function submitChkCount(inOrUp) {
       chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
       if(chkCnt == 10) {
     	  $.ajax({
               type: 'POST',
-              url: 'insertSubTree.do',
+              url: inOrUp,
               dataType: 'text', // form에 있는 데이터들을 controller로 text타입으로 
               data: $('#tree_form').serialize(),
               

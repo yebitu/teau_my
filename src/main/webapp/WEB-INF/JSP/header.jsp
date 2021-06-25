@@ -86,7 +86,7 @@
                   <ul class="header_btns_group ul_li_right">
                     <li>
                       <button type="button" class="main_search_btn">
-                        <a class="fal fa-user" href="login.do" style="color: black;" ></a>
+                        <a class="fal fa-user" href="mypage.do" style="color: black;" ></a>
                       </button>
                     </li>
                     <li>
@@ -96,7 +96,7 @@
                       </button>
                     </li>
                     <li>
-                      <a class="btn btn_primary text-uppercase" href="login.do">Join Us</a>
+                      <a class="btn btn_primary text-uppercase" href="login.do">LOGIN</a>
                     </li>
                   </ul>
                 </nav>

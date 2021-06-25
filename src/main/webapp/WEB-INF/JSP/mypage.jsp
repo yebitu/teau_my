@@ -132,29 +132,30 @@
           <br>
           
           <!-- 구독정보 -->
-        <div class="container">
-          <div id="subscribe_order" class="contact_form bg_white">
+        <div id="subscribe_order" class="container">
+          <div class="contact_form bg_white">
             <h3>구독 정보</h3><br>
             <ul>
               <li>
-
                 <div class="row">
                   <div class="col-md-4 col-xs-4">
                     <div class="item_content">
                       <img src="./assets/images/finder/3.jpg" class="img-responsive">
                     </div>
                   </div>
-                  <div class="col-md-7 col-xs-4" style="margin-left: 5%;">
-                    <div class="item_content">
+                  
+                <div class="col-md-7 col-xs-4">
+                 <form method="POST">
+                 <input type="hidden" id="memberId" name="memberId" value="${sub.subUser}" >
+                  <div class="item_content">
+                    <div>
                       <div>
                         <div>
-
-                          <div>
-                            <br>
-                            <h5> ${sub.orderCate} 구독
-
+                        
+                          <br>
+                          <h5>${sub.orderCate}구독 </h5>
                             <button type="button" class="btn btn-primary btn-radio" onclick="update_Check();">수정</button>          
-                    		<button type="button" class="btn btn-primary btn-radio" onclick="deletesub();">해지</button>
+                            <button type="button" class="btn btn-primary btn-radio" onclick="deletesub();">해지</button>
                             </h5>
                           </div>
                           <hr>
@@ -168,74 +169,15 @@
                           </div>
                           <div>
                             <dt>취향선택</dt>
-                            <dd>#${sub.tagSeason}, #${sub.tagBase}, #${sub.tagDrink}, #${sub.tagBlend}</dd>
-                          </div>
-
-                        </div>
-
-                      </div>
-                      <!-- <div>
-                        <button type="button" class="btn btn_primary text-uppercase">수정</button>                   
-                        <button type="button" class="btn btn_primary text-uppercase">해지</button> 
-                      </div> -->
-                    </div>
-                  </div>
-                </div>
-
-              </li>
-            </ul>
-          </div>
-        </div>
-        <br>
-        <!--배송정보-->
-          
-          
-          
-          <!-- 구독정보 -->
-<%--           <div class="container">
-            <div id="subscribe_order"  class="contact_form bg_white">
-              <h3>구독 정보</h3><br>
-              <ul>
-                <li>
-
-                  <div class="row">
-                    <div class="col-md-4 col-xs-4">
-                  <div class="item_content">
-                    <img src="./assets/images/finder/3.jpg" class="img-responsive">
-                  </div>
-                </div>
-                <div class="col-md-7 col-xs-4">
-                  <div class="item_content">
-                    <div>
-                      <div>
-                       
-                        <div>
-                        
-                          <br>
-                          <h5>${sub.orderCate} 구독 </h5>
-                        </div>
-                        <hr> 
-                        <div>
-                          <dt>주문번호(구독번호)</dt>
-                          <dd><fmt:formatDate value="${sub.subDate}" pattern="yyyyMMdd"/>${sub.subId}</dd>
-                        </div>
-                        <div>
-                          <dt>결제금액</dt>
-                          <dd>${sub.subPrice}원/월</dd>
-                        </div>
-                        <div>
-                          <dt>구독기한</dt><br>
-                          <dd>#${sub.tagSeason}, #${sub.tagBase}, #${sub.tagDrink}, #${sub.tagBlend}</dd>
-                        </div>
+                            <dd>${sub.tagSeason} ${sub.tagBase} ${sub.tagDrink}
+                                          ${sub.tagBlend} ${sub.tagTaste} ${sub.tagCaff} ${sub.tagEffect}
+                                          ${sub.treeSelect} </dd>
+						  </div>
                       </div>
                       
                     </div>
-                    <div>
-                      <button type="button" class="btn btn-primary btn-radio" onclick="update_Check();">수정</button>    
-                                      
-                      <button type="button" class="btn btn-primary btn-radio" onclick="deletesub();">해지</button>
-                    </div>
                   </div>
+                  </form>
                 </div>
               </div>              
               
@@ -243,8 +185,7 @@
               </ul>
             </div>
           </div>
-          <br> --%>
-          
+          <br>
           
           <!--배송정보-->
           <div class="container">
@@ -387,34 +328,81 @@
  function update_Check(){
 	 
 	 if( "${sub.orderCate}" == "씨앗"){
-			location.href= "updateSubSeed.do";
+		 var memberId = $('#memberId').val();
+			$.ajax({
+				type : 'POST',
+				url : 'subseedupdate.do',
+				data : {'memberId' : memberId},
+						success : function(data) {
+							window.location.href = ("subscribe_seed.do?data=" + encodeURIComponent(JSON
+									.stringify(data)));
+							//JSON을 string으로 변환해서 가..!
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					});
+		 
+/* 			location.href= "updateSubSeed.do"; */
 			
 		} else if( "${sub.orderCate}" == "새싹") {
-			location.href= "updateSubLeaf.do";	
+			var memberId = $('#memberId').val();
+			$.ajax({
+				type:'POST',
+				url:'subleafupdate.do',
+				dataType:'text',
+				data: {'memberId' : memberId},
+				success:function(data){
+					// encodeURIComponent : URI로 데이터를 전달하기 위해서 문자열을 인코딩
+					window.location.href=("subscribe_leaf.do?data="+encodeURIComponent(JSON.stringify(data))); // JSON -> String 
+				},
+				error: function(e){
+					console.log(e);
+				}
+			});
 			
-		} else if ("${sub.orderCate}" == "나무"){
-			location.href= "updateSubTree.do";
-			
-		}
-	 
-	$.ajax({
-		type:'POST',
-		url:'updateSubLeaf.do',
-		dataType:'text',
-		data: $()
+/* 			location.href= "updateSubLeaf.do";	*/			
 		
-	})
+		} else if ("${sub.orderCate}" == "나무"){
+			
+			var memberId = $('#memberId').val();
+			$.ajax({
+					type:'POST',
+					url:'subTreeUpdataLoad.do',
+					dataType:'text',
+					// id만 보내주면 되서 시리얼라이즈는 하지 않음
+					data: {'memberId' : memberId},
+					
+					success:function(data){
+						console.log(data);
+						//서버가 보내준 data(유저의 선택)을 JSON 문자열(스트링)로 변환한다
+						window.location.href=("subscribe_tree.do?data="+encodeURIComponent(JSON.stringify(data)));		
+					},
+					error: function(e){
+						console.log(e);
+					}
+			});
+			
+/* 			location.href= "updateSubTree.do"; */
+			
+		}	 
 }
 
+ 
 function deletesub(){
-	
-	if( "${sub.orderCate}" == "씨앗"){
-		location.href= "deleteSubSeed.do";
-	} else if( "${sub.orderCate}" == "새싹") {
-		location.href= "deleteSubLeaf.do";		
-	} else if ("${sub.orderCate}" == "나무"){
-		location.href= "deleteSubTree.do";
-	}
+
+	if(confirm("정말로 해지하시겠습니까?") == true){
+		
+		if( "${sub.orderCate}" == "씨앗") {
+				location.href= "deleteSubSeed.do";
+			}
+		else if( "${sub.orderCate}" == "새싹") {
+				location.href= "deleteSubLeaf.do";
+		} else if ("${sub.orderCate}" == "나무"){
+				location.href= "deleteSubTree.do";
+		}
+		
+	} 
 	
 }
 

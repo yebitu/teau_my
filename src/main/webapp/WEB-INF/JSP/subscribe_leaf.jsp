@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<% // 자바코드
+	String data =  request.getParameter("data"); // data를 String으로 
+%>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,12 +85,9 @@
 						style="font-size: 35px;">원하는 항목을 골라보세요(중복 가능)</h2>
 				</div>
 
-				<form id="insertForm" action="insertSubLeaf.do" method="POST">
-					<input type="hidden" id="subUser" name="subUser" value="${user.memberId}"/>
-					<div class="row justify-content-center">
-					
-
-
+				<form id="insertForm" method="POST">
+					<input type="hidden" id="subUser" name="subUser" value="${member.memberId}"/>
+					<div class="row justify-content-center">						
 						<!--나눠놓은 기준은 행 단위-->
 						<div class="col-lg-2"></div>
 						<div class="col-lg-8 sub_leaf_title">계절별</div>
@@ -186,7 +187,7 @@
 
 						<div class="text-center">
 							<br /> <br /> <br />
-							<button type="button" class="btn btn_primary text-uppercase" onclick="checkbox_Check();">새싹 구독 신청</button>
+							<input  type="button" id="btn_subSubmit" class="btn btn_primary text-uppercase" onclick="inOrUp()"/>
 						</div>
 					</div>
 				</form>
@@ -211,7 +212,72 @@
       ================================================== -->
 	<jsp:include page="footer.jsp"></jsp:include>
 <script>
-		function checkbox_Check() {
+		$(document).ready(function() {
+			var data = <%=data%>;
+			console.log(data);
+			if(data != null) {
+				var obj = JSON.parse(data); //string 객체를 json 객체로 변환
+				console.log(obj);
+				var tagSeason = obj['subInfo'].tagSeason.split(',');
+				var tagBase = obj['subInfo'].tagBase.split(',');
+				var tagDrink = obj['subInfo'].tagDrink.split(',');
+				var tagBlend = obj['subInfo'].tagBlend.split(',');
+				console.log(tagSeason);
+				
+				$('input:checkbox[name="tagSeason"]').each(function() {
+					for(var i = 0; i< tagSeason.length; i++){
+						if(this.value == tagSeason[i]) {
+							this.checked = true;
+						}
+					}
+				});
+				$('input:checkbox[name="tagBase"]').each(function() {
+					for(var i = 0; i< tagBase.length; i++){
+						if(this.value == tagBase[i]) {
+							this.checked = true;
+						}
+					}
+				});
+				$('input:checkbox[name="tagDrink"]').each(function() {
+					for(var i = 0; i< tagDrink.length; i++){
+						if(this.value == tagDrink[i]) {
+							this.checked = true;
+						}
+					}
+				});
+				$('input:checkbox[name="tagBlend"]').each(function() {
+					for(var i = 0; i< tagBlend.length; i++){
+						if(this.value == tagBlend[i]) {
+							this.checked = true;
+						}
+					}
+				});
+				
+			}
+		
+		if(data == null){
+			$('#btn_subSubmit').val('새싹 구독 신청'); 
+			
+		}else{
+			$('#btn_subSubmit').val('새싹 구독 수정');
+		}
+			
+		});
+		
+		
+		function inOrUp(){
+			var data = <%=data%>
+			if(data == null){
+				var insert = 'insertSubLeaf.do';
+				checkbox_Check(insert);
+			}else{
+				var update = 'updateSubLeaf.do';
+				checkbox_Check(update);
+			}
+		}
+		
+		function checkbox_Check(inOrUp) {
+						
 			if ($("input:checkbox[name=tagSeason]").is(":checked") == false) {
 				alert("'계절별'을 하나 이상 선택해주세요");
 				return false;				
@@ -225,13 +291,13 @@
 				alert("'블렌드'를 하나 이상 선택해주세요");
 				return false;				
 			}else{
+				
 			 $.ajax({
 					type: 'POST',
-					url: 'insertSubLeaf.do',
+					url: inOrUp,
 					dataType: 'text', // form에 있는 데이터들을 controller로 text타입으로 
 					data: $('#insertForm').serialize(),
 					success: function(data) {
-
 						alert(data);
 						window.location.href=("getSubLeaf.do?subUser=" + $('#subUser').val()); //JSP 이동 페이지 적기  
 					}, 
@@ -241,6 +307,8 @@
 				}); 
 			}
 		}
+		
+		
 		
 	</script>
 </body>

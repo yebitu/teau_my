@@ -11,7 +11,7 @@ import com.teau.biz.subscribe.SubTeaVO;
 import com.teau.biz.subscribe.SubVO;
 
 @Service("treeService")
-public class TreeServiceImpl implements SubTreeService{
+public class TreeServiceImpl implements SubService{
 	@Autowired
 	private TreeDAOMybatis TreeDAO;
 	
