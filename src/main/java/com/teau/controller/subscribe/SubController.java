@@ -55,7 +55,7 @@ public class SubController {
 		}
 		
 		// 씨앗구독 수정
-		@RequestMapping(value = "/subseedupdate.do", produces = "application/text; charset=utf8")
+		@RequestMapping(value = "/seedUpdateLoad.do", produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String update(@RequestParam Map<String, String> paramMap) throws JsonProcessingException {
 			SubVO sub = new SubVO();
@@ -88,7 +88,7 @@ public class SubController {
 	
 	
 		// 새싹구독 수정
-		@RequestMapping(value = "/subleafupdate.do", produces = "application/text; charset=utf8")
+		@RequestMapping(value = "/leafUpdateLoad.do", produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String updateleaf(@RequestParam Map<String, String> paramMap) throws JsonProcessingException {
 			SubVO sub = new SubVO();
@@ -127,8 +127,8 @@ public class SubController {
 		return "/getTeaList.do";
 	}
 	
-	// 수정
-	@RequestMapping(value="/subTreeUpdataLoad.do", produces="application/text; charset=utf8")
+	// 수정 
+	@RequestMapping(value="/treeUpdateLoad.do", produces="application/text; charset=utf8")
 	@ResponseBody
 	public String updataLoad(@RequestParam Map<String, String> paramMap) throws JsonProcessingException{
 		SubVO sub = new SubVO();
