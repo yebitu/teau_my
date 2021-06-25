@@ -41,6 +41,7 @@ public class SubController {
 	// 구독메인
 	@RequestMapping("/subscribe_main.do")
 	public String main() {
+		
 		return "WEB-INF/JSP/subscribe_main.jsp";
 	}
 	

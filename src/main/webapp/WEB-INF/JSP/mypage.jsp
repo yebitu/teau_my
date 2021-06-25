@@ -132,7 +132,7 @@
           <br>
           
           <!-- 구독정보 -->
-        <div id="subscribe_order" class="container">
+        <div  id="subscribe_order" class="container">
           <div class="contact_form bg_white">
             <h3>구독 정보</h3><br>
             <ul>
@@ -326,16 +326,32 @@
 <script>
 
  
+	$(document).ready(function() {
+	 // 구독 내역 없을 시 구독정보 박스 숨기기
+	 
+	 console.log("${sub.orderCate}");
+	 if("${sub.orderCate}" == ""){
+		 //document.getElementByid("subscribe_order").sytle.display="none";
+		 $("#subscribe_order").hide();
+		 
+	 } else {
+		 //document.getElementByid("subscribe_order").sytle.display="none";
+		 $("#subscribe_order").show();
+		 
+	 }
+ })
 
  function update_Check(){
 	 
-	 if( "${sub.orderCate}" == "씨앗"){ 
+	 var check = "${sub.orderCate}";
+	 
+	 if( check == "씨앗"){ 
 		 var seed = "seed";
 		 updateJson(seed);
-		} else if( "${sub.orderCate}" == "새싹") {
+		} else if( check == "새싹") {
 			var leaf = "leaf";	
 			updateJson(leaf);				
-		} else if ("${sub.orderCate}" == "나무"){		
+		} else if ( check == "나무"){		
 			var tree = 'tree';
 			updateJson(tree);	
 		}	 

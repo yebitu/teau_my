@@ -268,6 +268,7 @@
 		function inOrUp(){
 			var data = <%=data%>
 			if(data == null){
+				
 				var insert = 'insertSubLeaf.do';
 				checkbox_Check(insert);
 			}else{

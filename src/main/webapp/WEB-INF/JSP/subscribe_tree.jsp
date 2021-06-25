@@ -55,6 +55,7 @@
         ================================================== -->
       <section class="breadcrumb_section text-uppercase"
         style="background-image: url(assets/images/breadcrumb/tree.jpg);">
+        
         <div class="container">
           <h1 class="page_title text-white wow fadeInUp" data-wow-delay=".1s">나무 구독</h1>
           <ul class="breadcrumb_nav ul_li wow fadeInUp" data-wow-delay=".2s">
@@ -77,11 +78,11 @@
 
       <!-- reserve_table_section - start
         ================================================== -->
-      <section class="reserve_table_section sec_ptb_120 bg-grey">
-        <div id="sub_tree" class="container">
-          <div class="reserve_table_form wow fadeInUp bg-white" style="padding-left: 0px; padding-right: 0px;"
-            data-wow-delay=".1s">
-            <div class="subcribe_title">
+    <section class="reserve_table_section sec_ptb_120 bg-grey">
+      <div id="sub_tree" class="container">
+        <div class="reserve_table_form wow fadeInUp bg-white" style="padding-left: 0px; padding-right: 0px;"
+          data-wow-delay=".1s">
+          <div class="subcribe_title">
               <h2 class="form_title text-center text-uppercase" style="font-size: 35px;">원하는 항목을 골라보세요(중복가능)</h2>
             </div>
             
@@ -101,7 +102,7 @@
                   <c:forEach items="${teaList}" var="tea">
                     <c:if test="${tea.ttGen eq 'base'}">
                     
-                    <li class="tt_goods">
+                    <li class="tt_goods tt_base">
                       <label>
                           <div class="tt_cate">
                             <span>${tea.ttCate}</span>
@@ -247,22 +248,22 @@
 
     $(document).ready(function () {
     	
-      //각각 체크박스를 클릭시 체크 알아보게 변화
-      $("input:checkbox").on("click", function () {
-      // chkGoodsList.push($(this).val());
-      if($(this).is(":checked") == true){
-        $(this).parents('li').addClass('selected');
-      } else {
-        $(this).parents('li').removeClass('selected');
-      }
-      //
-      // return false;
-      // $(this).parents('li').toggleClass('selected');
-    });
+    	//각각 체크박스를 클릭시 체크 알아보게 변화
+        $("input:checkbox").on("click", function () {
+          // chkGoodsList.push($(this).val());
+          if($(this).is(":checked") == true){
+            $(this).parents('li').addClass('selected');
+          } else {
+            $(this).parents('li').removeClass('selected');
+          }
+          //
+          // return false;
+          // $(this).parents('li').toggleClass('selected');
+        });
       
       
 
-      // 업데이트 시 기존 사용자의 선택 불러오기
+      // 업데이트 시 기존 사용자의 선택 불러오기(오류 있음. 수정하기에서 10개 제한 걸리지 않고, 애드 아이템 선택하지 않은 경우 다른 아이템도 출력하지 않음)
       var data = <%=data%>;
       console.log(data);
       
@@ -272,8 +273,11 @@
     	  console.log(obj);
     	  
     	  var treeSelect = obj['subInfo'].treeSelect.split(',');
-    	  var treeAdd = obj['subInfo'].treeAdd.split(',');
-    	  //treeAdd = treeAdd.split(',');
+    	  var treeAdd = obj['subInfo'].treeAdd; 
+    	  
+    	  if(treeAdd != null){	  
+    	  treeAdd = treeAdd.split(',');
+    	  }
     	  var treeReq = obj['subInfo'].treeReq;
     	  var subPrice = obj['subInfo'].subPrice;
     	  
@@ -282,9 +286,12 @@
     	  console.log(treeReq);
     	  console.log(subPrice);
 
+    	  // 요청사항
     	  $('#treeReq').val(treeReq);
+    	  // 총가격
     	  $('#totalPrice').val(subPrice);
     	  
+    	  // 아이템 선택 뿌려주기
     	  $('input:checkbox[name="treeSelect"]').each(function(){
     		  for(var i=0 ; i< treeSelect.length ; i++){    			  
 	    		  if(this.value == treeSelect[i]){
@@ -293,6 +300,8 @@
     		  } 
     		});
     	  
+    	  if(treeAdd != null){
+    		  
 		  $('input:checkbox[name="treeAdd"]').each(function(){
 				for(var i=0; i<treeAdd.length ;i++){    			  
 		    		  if(this.value == treeAdd[i] ){
@@ -301,11 +310,10 @@
 	    		  } 				
 			});    	  
     	  
+    	  }
       }
       
       // insert와 update 구분
-      
-      
       if(data == null){
  		  //사용자가 보낸 값이 없으면 - insert
  		  $("#btn_subSubmit").val("나무 구독하기")
@@ -398,7 +406,9 @@
     }
     
     function submitChkCount(inOrUp) {
+    	
       chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
+      
       if(chkCnt == 10) {
     	  $.ajax({
               type: 'POST',

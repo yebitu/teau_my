@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <body>
+
  <!-- body_wrap - start -->
   <div class="body_wrap">
 
@@ -96,7 +97,7 @@
                       </button>
                     </li>
                     <li>
-                      <a class="btn btn_primary text-uppercase" href="login.do">LOGIN</a>
+                      <input type="button" value="LOGIN" class="btn btn_primary text-uppercase" href="login.do"/>
                     </li>
                   </ul>
                 </nav>
