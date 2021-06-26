@@ -19,6 +19,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>Subscribe - Tree</title>
+  
   <link rel="shortcut icon" href="assets/images/feature/11.jpg">
 
   <!-- framework - css include -->
@@ -45,7 +46,21 @@
   <link rel="stylesheet" type="text/css" href="assets/css/teau.css">
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <!-- 유저 세션 받아오기 -->
+  <script src="assets/js/com_lib.js"></script>
+  <!-- 제이쿼리  -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
+     <script type="text/javascript">
+  	$(document).ready(function(){
+  		getMemberInfo();
+  	});
+  	
+  	function sessionCheck(obj){
+  		var id = obj["member"].id;
+  		console.log(id);
+  	}
+  </script>
 
 
 </head>
@@ -91,6 +106,7 @@
             <form id="tree_form" method="get" action="insertSubTree.do">
             
             <input type=hidden id="subUser" name="subUser" value="${member.memberId}"/>
+            <input type=hidden id="subCheck" name="subCheck" value="${member.memberSub}"/>
             
             <div class="row justify-content-center">
               <div id="tt_base" class="sub_tree">
@@ -240,16 +256,17 @@
 
 
   <script>
-    var chkGoodsList = new Array();
-    // var chkGoodsList = [];
-    var chkCnt = 0;
-    var selected;
-    var addprice = 0;
+	  let chkGoodsList = new Array();
+	  // var chkGoodsList = [];
+	  let chkCnt = 0;
+	  let chkCntBs = 0;
+	  let selected;
+	  let addprice = 0;
 
-    $(document).ready(function () {
+  $(document).ready(function () {
     	
     	//각각 체크박스를 클릭시 체크 알아보게 변화
-        $("input:checkbox").on("click", function () {
+/*         $("input:checkbox").on("click", function () {
           // chkGoodsList.push($(this).val());
           if($(this).is(":checked") == true){
             $(this).parents('li').addClass('selected');
@@ -260,26 +277,26 @@
           // return false;
           // $(this).parents('li').toggleClass('selected');
         });
-      
+       */
       
 
-      // 업데이트 시 기존 사용자의 선택 불러오기(오류 있음. 수정하기에서 10개 제한 걸리지 않고, 애드 아이템 선택하지 않은 경우 다른 아이템도 출력하지 않음)
+      // 업데이트 시 기존 사용자의 선택 불러오기(오류 수정)
       var data = <%=data%>;
       console.log(data);
       
       if(data != null){
     	  //stirng을 다시 JSON 객체로 변환
-    	  var obj = JSON.parse(data);
+    	  let obj = JSON.parse(data);
     	  console.log(obj);
     	  
-    	  var treeSelect = obj['subInfo'].treeSelect.split(',');
-    	  var treeAdd = obj['subInfo'].treeAdd; 
+    	  let treeSelect = obj['subInfo'].treeSelect.split(',');
+    	  let treeAdd = obj['subInfo'].treeAdd; 
     	  
     	  if(treeAdd != null){	  
     	  treeAdd = treeAdd.split(',');
     	  }
-    	  var treeReq = obj['subInfo'].treeReq;
-    	  var subPrice = obj['subInfo'].subPrice;
+    	  let treeReq = obj['subInfo'].treeReq;
+    	  let subPrice = obj['subInfo'].subPrice;
     	  
     	  console.log(treeSelect);
     	  console.log(treeAdd);
@@ -293,7 +310,7 @@
     	  
     	  // 아이템 선택 뿌려주기
     	  $('input:checkbox[name="treeSelect"]').each(function(){
-    		  for(var i=0 ; i< treeSelect.length ; i++){    			  
+    		  for(let i=0 ; i< treeSelect.length ; i++){    			  
 	    		  if(this.value == treeSelect[i]){
 	    			  this.checked = true;
 	    		  }
@@ -303,7 +320,7 @@
     	  if(treeAdd != null){
     		  
 		  $('input:checkbox[name="treeAdd"]').each(function(){
-				for(var i=0; i<treeAdd.length ;i++){    			  
+				for(let i=0; i<treeAdd.length ;i++){    			  
 		    		  if(this.value == treeAdd[i] ){
 		    			  this.checked = true;
 		    		  }
@@ -313,7 +330,7 @@
     	  }
       }
       
-      // insert와 update 구분
+      //insert와 update 구분 
       if(data == null){
  		  //사용자가 보낸 값이 없으면 - insert
  		  $("#btn_subSubmit").val("나무 구독하기")
@@ -325,37 +342,74 @@
 
       // 베이스 선택
       $("input:checkbox[name='treeSelect']").on("click", function () {
-        var chkCntBs = $("input:checkbox[class='tt_base']:checked").length;
+        let chkCntBs = $("input:checkbox[class='tt_base']:checked").length;
+        chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
+        
         if (chkCntBs > 3) {
-          $(this).prop("checked", false);
-          alert("베이스는 3개까지만 선택할 수 있습니다.");
-        }
+            $(this).prop("checked", false);
+            $(this).parents('li').removeClass('selected');
+            alert("베이스는 3개까지만 선택할 수 있습니다.");
+            return false;
+          } else {
+            if($(this).is(":checked") == true){
+              chkGoodsList.push($(this).val());
+              console.log(chkGoodsList);
+              $(this).parents('li').addClass('selected');
+            } else {
+              for(var i = 0; i < chkGoodsList.length; i++) {
+                if(chkGoodsList[i] == $(this).val()) {
+                  chkGoodsList.splice(i, 1);
+                  i--;
+                  console.log(chkGoodsList);
+                }
+              }
+              $(this).parents('li').removeClass('selected');
+            }
+
+          } 
 
         // 베이스+블렌드 총 갯수 10개 이하
-        // $("input:checkbox[name='select']").on("click", function () {
+        	
           chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
-          if (chkCnt > 10) {
-            $(this).prop("checked", false);
-            alert("10개까지 선택하실 수 있습니다.")
-          }
-        //});
+          if (chkCnt > 10 ) {
+              $(this).prop("checked", false);
+              alert("10개까지 선택하실 수 있습니다.");
+              $(this).parents('li').removeClass('selected');
+              return false;
+            } else {
+              if($(this).is(":checked") == true){
+              // chkGoodsList.push($(this).val());
+              // console.log(chkGoodsList);
+              $(this).parents('li').addClass('selected');
+            } else {
+              $(this).parents('li').removeClass('selected');
+            }
 
-      });
+            }
+          //});
+
+        });
+          
+      
+      
+      
       
       
       $("input:checkbox[name='treeAdd']").on("click", function () {
-    	  var price = $('#totalPrice').val();
-          // value 값을 string으로 가져올 수도 있으니 int로 변환
+    	  let price = $('#totalPrice').val();
+          let price1;
+    	  // value 값을 string으로 가져올 수도 있으니 int로 변환
           price = parseInt(price);
+          
           if($('#'+this.id).is(":checked")== true){
         	if(this.id == 'tt_49') {
-            	var price1 = $('#price49').val();
+            	price1 = $('#price49').val();
   	            price1 = parseInt(price1);
         	} else if(this.id == 'tt_50') {
-            	var price1 = $('#price50').val();
+            	price1 = $('#price50').val();
             	price1 = parseInt(price1);
         	} else if(this.id == 'tt_51') {
-            	var price1 = $('#price51').val();
+            	price1 = $('#price51').val();
             	price1 = parseInt(price1);
         	}
             price += price1;
@@ -364,13 +418,13 @@
             console.log(price);
           } else {
         	  if(this.id == 'tt_49') {
-              	var price1 = $('#price49').val();
+              	price1 = $('#price49').val();
   	            price1 = parseInt(price1);
           	} else if(this.id == 'tt_50') {
-              	var price1 = $('#price50').val();
+              	price1 = $('#price50').val();
               	price1 = parseInt(price1);
           	} else if(this.id == 'tt_51') {
-              	var price1 = $('#price51').val();
+              	price1 = $('#price51').val();
               	price1 = parseInt(price1);
           	}
             price -= price1;
@@ -388,18 +442,26 @@
     
     /* 함수 */
     
-  
-
+    
+    // insert update 구분 함수 + 1인 1구독을 위해 구독정보 체크
     function inORUp(){
-    	var data = <%=data%>;
+    	
+    	let subCheck = $('#subCheck').val();
+    	//let subCheck = $('#subCheck').val();
+    	let data = <%=data%>;
     	if(data == null) {
-    		// 사용자가 보낸 정보가 없으면 insert
-    		var insert = 'insertSubTree.do'
+    		// 사용자가 보낸 정보가 없으면 구독 내역 있는지 체크(1인 1구독)    		
+    		if(subCheck == 1){
+    			alert("이미 구독 중인 상품이 있습니다");
+    		} else{
+    		// 구독 내역 없으면 insert
+    		let insert = 'insertSubTree.do'
     		submitChkCount(insert);
+    		}
     		
     	} else {
     		// 사용자가 보낸 정보가 있으면 update
-    		var update = 'updateSubTree.do'
+    		let update = 'updateSubTree.do'
     		submitChkCount(update);
     	}
     	
@@ -430,18 +492,7 @@
         return false;
         
       } 
-        
-
-      /*  goSubmit;
-        alert("구독신청 완료") */
-        
-      }
-    
-
-/*     function goSubmit() {
-      $("#tree_form").submit();
-    } */
-    
+    }
 
    
 

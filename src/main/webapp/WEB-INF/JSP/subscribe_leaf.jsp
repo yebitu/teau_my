@@ -87,6 +87,7 @@
 
 				<form id="insertForm" method="POST">
 					<input type="hidden" id="subUser" name="subUser" value="${member.memberId}"/>
+					<input type="hidden" id="subCheck" name="subCheck" value="${member.memberSub}"/>
 					<div class="row justify-content-center">						
 						<!--나눠놓은 기준은 행 단위-->
 						<div class="col-lg-2"></div>
@@ -266,13 +267,17 @@
 		
 		
 		function inOrUp(){
-			var data = <%=data%>
+			let data = <%=data%>
+			let subCheck = $('#subCheck').val();
 			if(data == null){
-				
-				var insert = 'insertSubLeaf.do';
+				if(subCheck == 1) {
+					alert("이미 구독 중인 상품이 있습니다.")
+				} else {					
+				let insert = 'insertSubLeaf.do';
 				checkbox_Check(insert);
+				}
 			}else{
-				var update = 'updateSubLeaf.do';
+				let update = 'updateSubLeaf.do';
 				checkbox_Check(update);
 			}
 		}

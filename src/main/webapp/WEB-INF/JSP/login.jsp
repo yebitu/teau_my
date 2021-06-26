@@ -220,7 +220,7 @@
                       </div>
                     </ul>
                     <div>
-                      <button type="button" onclick="location.href='signUp.do'" class="btn btn-primary btn-block" style=" background-color: #fd6c44; font-size: large;" type="button" id="btn-signup">
+                      <button type="button" onclick="location.href='signup.do'" class="btn btn-primary btn-block" style=" background-color: #fd6c44; font-size: large;" type="button" id="btn-signup">
                         <i class="fas fa-user-plus"></i> 회원가입 </button>
                       </div>
                     <!-- <div class="member_sns_login">

@@ -17,5 +17,6 @@ public class MemberVO {
 	private String memberAddress;
 	private int memberPoint;
 	private Date memberJoindate;
+	private String memberSub;
 
 }

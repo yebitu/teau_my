@@ -26,8 +26,12 @@ public class LeafController {
 	
 	@RequestMapping(value="/insertSubLeaf.do", produces = "application/text; charset=utf8")
 	@ResponseBody // viewResolver로 넘어가는 것을 방지 // Model은 json타입으로 오는 정보들을 vo로 맞춰주기 위히여
-	public String insertSub(@ModelAttribute SubVO vo) throws IOException {
-
+	public String insertSub(@ModelAttribute SubVO vo, HttpServletRequest request) throws IOException {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member != null) {			
+			member.setMemberSub("1");
+			}
 		System.out.println(vo.getSubId());
 		leafService.insertSub(vo);
 		return "구독 신청이 완료되었습니다.";
@@ -45,6 +49,8 @@ public class LeafController {
 	public String deleteSub(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
+		// 1인 1구독 체크 해제
+		member.setMemberSub("0");
 		
 		SubVO vo = new SubVO();
 		vo.setSubUser(member.getMemberId());

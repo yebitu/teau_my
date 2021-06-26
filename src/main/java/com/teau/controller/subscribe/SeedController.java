@@ -26,7 +26,13 @@ public class SeedController {
 	// 구독 등록
 	@RequestMapping(value = "/insertSubSeed.do", produces = "application/json; charset=utf8")
 	@ResponseBody // viewResolver로 넘어가는 것을 방지  //Model은 json타입으로 오는 정보들을 vo로 맞춰주기 위하여
-	public String insertSub(@ModelAttribute SubVO vo) throws IOException {
+	public String insertSub(@ModelAttribute SubVO vo, HttpServletRequest request) throws IOException {
+		// 구독 구분을 위해 세션에서 멤버 객체 뽑아오기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member != null) {			
+		member.setMemberSub("1");
+		}
 		
 		seedService.insertSub(vo);
 		System.out.println("Controller 삽입");
@@ -47,6 +53,8 @@ public class SeedController {
 	public String deleteSub(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
+		// 1인 1구독 체크 해제
+		member.setMemberSub("0");
 		
 		SubVO vo = new SubVO();
 		vo.setSubUser(member.getMemberId());
