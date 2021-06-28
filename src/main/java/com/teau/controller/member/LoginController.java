@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +25,7 @@ public class LoginController {
 	
 	@RequestMapping("/loginView.do")
 	// "memberId"의 파라미터를 요청해서 String id에 넣어달라(폼에서 사용자가 작성한 memberId가 넘어오게 된다)
-	public String loginView(@RequestParam("memberId")String id, @RequestParam("memberPass")String password, HttpSession session) {
+	public String loginView(@RequestParam("memberId")String id, @RequestParam("memberPass")String password, HttpSession session, Model model) {
 		MemberVO vo = new MemberVO();
 		vo.setMemberId(id);
 		
@@ -38,16 +39,24 @@ public class LoginController {
 		System.out.println(member);
 		
 		// 아이디와 패스워드가 일치하는지 체크
-		if(id.equals(member.getMemberId()) && password.equals(member.getMemberPass())) {
-			session.setAttribute("member", member);
-			System.out.println(member.getMemberId());
-			System.out.println("로그인 성공");
-			return "redirect:index.jsp";
-			
+		if(member != null) {
+			// 아이디와 비밀번호 모두 일치
+			if(id.equals(member.getMemberId()) && password.equals(member.getMemberPass())) {
+				session.setAttribute("member", member);
+				System.out.println(member.getMemberId());
+				System.out.println("로그인 성공");
+				return "redirect:index.jsp";
+				
+			} else {
+				// 아이디와 비밀번호가 일치하지 않음
+				System.out.println("아이디 또는 비밀번호가 잘못되었습니다");
+				model.addAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다");
+				return "login";
+			}
 		} else {
-			
-			System.out.println("아이디 또는 비밀번호가 잘못되었습니다");
-			return "redirect:login.do";
+			System.out.println("아이디 또는 비밀번호가 잘못되었습니다.");
+			model.addAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다");
+			return "login";
 		}
 				
 	}

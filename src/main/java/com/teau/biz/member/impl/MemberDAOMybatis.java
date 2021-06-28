@@ -44,5 +44,10 @@ public class MemberDAOMybatis {
 		int result = mybatis.selectOne("MemberDAO.memberIdcheck", vo);
 		return result;	
 	}
+	
+	public void MemberSub(MemberVO vo) {
+		System.out.println("mybatis로 Membersub 값 변경");
+		mybatis.update("MemberDAO.memberSub", vo);
+	}
 
 }

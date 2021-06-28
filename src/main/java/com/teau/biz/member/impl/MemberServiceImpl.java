@@ -27,6 +27,10 @@ public class MemberServiceImpl implements MemberService {
 		MemberDAO.updateMember(vo);
 
 	}
+	
+	public void memberSub(MemberVO vo) {
+		MemberDAO.MemberSub(vo);
+	}
 
 	public void deleteMember(MemberVO vo) {
 		MemberDAO.deleteMember(vo);
@@ -50,5 +54,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = MemberDAO.memberIdcheck(vo);	
 		return result;
 	}
+	
+
 
 }

@@ -53,6 +53,32 @@
       background-color: #fd6c44;
     }
   </style>
+  
+  	<script type="text/javascript">
+		$(document).ready(function() {
+			
+	 		//비밀번호 중복체크
+			$("#alert-success").hide();
+			$("#alert-danger").hide();
+			$("input").keyup(function(){
+				var pwd1=$("#pwd1").val();
+				var pwd2=$("#pwd2").val();
+				if(pwd1 != "" || pwd2 != "") {
+					if(pwd1 == pwd2) {
+						$("#alert-success").show();
+						$("#alert-danger").hide();
+						$("#joinsubmit").removeAttr("disabled");
+					}else {
+						$("#alert-success").hide();
+						$("#alert-danger").show();
+						$("#joinsubmit").attr("disabled", "disabled");
+					}
+				}
+			});
+		
+		});
+		
+		</script>
 
 
 </head>
@@ -133,8 +159,14 @@
                           </tr>
                           <tr>
                             <th class="hi width-xsmall">비밀번호<span class="hi text-danger">*</span></th>
-                            <td><input type="password" name="memberPass" placeholder="비밀번호를 입력하세요" value="${member.memberPass }"></td>
+                            <td><input type="password" name="memberPass" id="pwd1" placeholder="비밀번호를 입력하세요" value="${member.memberPass }"></td>
                           </tr>
+                          <tr>
+                            <th class="hi width-xsmall">비밀번호<span class="hi text-danger">*</span></th>
+                            <td><input type="password" name="rememberPass" id="pwd2" placeholder="비밀번호 확인" value="${member.memberPass }"></td>
+                          </tr>
+                          <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+						  <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
                           <tr>
                             <th class="hi width-xsmall">전화번호<span class="hi text-danger">*</span></th>
                             <td><input type="text" name="memberPhone" placeholder="010-1111-1111" value="${member.memberPhone }"></td>

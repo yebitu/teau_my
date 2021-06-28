@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.teau.biz.member.MemberService;
 import com.teau.biz.member.MemberVO;
 //import com.teau.biz.subscribe.SubTreeService;
 import com.teau.biz.subscribe.SubTeaVO;
@@ -25,6 +26,9 @@ public class TreeController {
 	@Autowired
 	@Qualifier("treeService")
 	private TreeServiceImpl treeService;
+	
+	@Autowired
+	private MemberService memberService;
 	
     @RequestMapping(value="/insertSubTree.do", produces="application/json; charset=utf8")
 	@ResponseBody // Viewresolver로 넘어가는 것을 막기 위해, json형태로 받음. 그래서 json형태로 받은 것을 modelAtrribute를 통해 vo객체에 담아준다-인서트하기 위해서
@@ -41,7 +45,10 @@ public class TreeController {
 		// 1인 1구독 체크
 		member.setMemberSub("1");
 		
-    	treeService.insertSub(vo);
+		treeService.insertSub(vo);
+		
+    	memberService.memberSub(member);
+    	
 		System.out.println("컨트롤러-나무 구독 저장");
 		//ajax에 담아줄 data
 		return "나무 구독이 신청되었습니다.";
@@ -64,6 +71,7 @@ public class TreeController {
 		// 1인 1구독 체크 해제
 		if(member != null) {			
 			member.setMemberSub("0");
+			memberService.memberSub(member);
 			}
 		
 		SubVO vo = new SubVO();

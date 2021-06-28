@@ -77,7 +77,7 @@ public class SubController {
 		
 
     // 새싹구독
-		//구독선택창
+		//구독선택창 > jsp에서 함수로 처리
 		@RequestMapping("/subscribe_leaf.do")
 		public String leaf(HttpServletRequest request, Model model) {
 			HttpSession session = request.getSession();
@@ -88,6 +88,7 @@ public class SubController {
 	
 	
 		// 새싹구독 수정
+		
 		@RequestMapping(value = "/leafUpdateLoad.do", produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String updateleaf(@RequestParam Map<String, String> paramMap) throws JsonProcessingException {

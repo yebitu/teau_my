@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String msg = (String)request.getAttribute("msg");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -154,8 +157,8 @@
 }
 
 
-
     </style>
+
   </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
@@ -309,5 +312,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/script.js"></script>
     <script src="assets/js/finder.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+    	$(document).ready(function(){
+    		var msg = '<%=msg%>';// 없는 값일 때 alert
+    		if(msg != 'null'){
+    			alert(msg);
+    		}
+    	});
+    </script>
 </body>
 </html>

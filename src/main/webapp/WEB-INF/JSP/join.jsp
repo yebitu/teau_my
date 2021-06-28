@@ -16,6 +16,84 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <title>signUp</title>
+
+
+
+
+
+<link rel="shortcut icon" href="assets/images/feature/11.jpg">
+
+<!-- fraimwork - css include -->
+<link rel="stylesheet" type="text/css"
+	href="assets/css/bootstrap.min.css">
+
+<!-- icon font - css include -->
+<link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
+
+<!-- animation - css include -->
+<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+
+<!-- carousel - css include -->
+<link rel="stylesheet" type="text/css" href="assets/css/slick.css">
+<link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+
+<!-- popup - css include -->
+<link rel="stylesheet" type="text/css"
+	href="assets/css/magnific-popup.css">
+
+<!-- jquery-ui - css include -->
+<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
+
+<!-- custom - css include -->
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+<style>
+.contact_form {
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+.container .btn {
+	display: inline-block
+}
+</style>
+
+
+
+	<!-- fraimwork - jquery include -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!-- animation - jquery include -->
+	<script src="assets/js/wow.min.js"></script>
+
+	<!-- carousel - jquery include -->
+	<script src="assets/js/slick.min.js"></script>
+
+	<!-- popup - jquery include -->
+	<script src="assets/js/magnific-popup.min.js"></script>
+
+	<!-- isotope filter - jquery include -->
+	<script src="assets/js/isotope.pkgd.min.js"></script>
+
+	<!-- google map - jquery include -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
+	<script src="assets/js/gmaps.min.js"></script>
+
+	<!-- jquery-ui - jquery include -->
+	<script src="assets/js/jquery-ui.js"></script>
+
+	<!-- off canvas sidebar - jquery include -->
+	<script src="assets/js/mCustomScrollbar.js"></script>
+
+	<!-- custom - jquery include -->
+	<script src="assets/js/main.js"></script>
+
+	<script src="assets/js/jquery-3.6.0.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <script language="javascript">
 	// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
 	//document.domain = "abc.go.kr";
@@ -66,77 +144,7 @@
 		
 	
 </script>
-
-
-
-<link rel="shortcut icon" href="assets/images/feature/11.jpg">
-
-<!-- fraimwork - css include -->
-<link rel="stylesheet" type="text/css"
-	href="assets/css/bootstrap.min.css">
-
-<!-- icon font - css include -->
-<link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
-
-<!-- animation - css include -->
-<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-
-<!-- carousel - css include -->
-<link rel="stylesheet" type="text/css" href="assets/css/slick.css">
-<link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
-
-<!-- popup - css include -->
-<link rel="stylesheet" type="text/css"
-	href="assets/css/magnific-popup.css">
-
-<!-- jquery-ui - css include -->
-<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
-
-<!-- custom - css include -->
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-<style>
-.contact_form {
-	margin-left: 15%;
-	margin-right: 15%;
-}
-
-.container .btn {
-	display: inline-block
-}
-</style>
-
-	<!-- fraimwork - jquery include -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-
-	<!-- animation - jquery include -->
-	<script src="assets/js/wow.min.js"></script>
-
-	<!-- carousel - jquery include -->
-	<script src="assets/js/slick.min.js"></script>
-
-	<!-- popup - jquery include -->
-	<script src="assets/js/magnific-popup.min.js"></script>
-
-	<!-- isotope filter - jquery include -->
-	<script src="assets/js/isotope.pkgd.min.js"></script>
-
-	<!-- google map - jquery include -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
-	<script src="assets/js/gmaps.min.js"></script>
-
-	<!-- jquery-ui - jquery include -->
-	<script src="assets/js/jquery-ui.js"></script>
-
-	<!-- off canvas sidebar - jquery include -->
-	<script src="assets/js/mCustomScrollbar.js"></script>
-
-	<!-- custom - jquery include -->
-	<script src="assets/js/main.js"></script>
-
-	<script src="assets/js/jquery-3.6.0.min.js"></script>
+	
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -144,8 +152,35 @@
 			if(msg != 'null') {
 				alert(msg);
 			}
+			
+	 		//비밀번호 중복체크
+			$("#alert-success").hide();
+			$("#alert-danger").hide();
+			$("input").keyup(function(){
+				var pwd1=$("#pwd1").val();
+				var pwd2=$("#pwd2").val();
+				if(pwd1 != "" || pwd2 != "") {
+					if(pwd1 == pwd2) {
+						$("#alert-success").show();
+						$("#alert-danger").hide();
+						$("#joinsubmit").removeAttr("disabled");
+					}else {
+						$("#alert-success").hide();
+						$("#alert-danger").show();
+						$("#joinsubmit").attr("disabled", "disabled");
+					}
+				}
+			});
+		
 		});
-	</script>
+		
+		</script>
+		
+
+
+		
+		
+
 </head>
 
 
@@ -175,7 +210,7 @@
 
 						<div class="col-lg-2 col-md-6 col-6">
 							<div class="brand_logo">
-								<a class="brand_link" href="index.html"> <img
+								<a class="brand_link" href="index.jsp"> <img
 									src="assets/images/logo/TeaU.png"
 									srcset="assets/images/logo/logo_black_2x.png 2x"
 									alt="logo_not_found">
@@ -195,50 +230,50 @@
 									id="main_menu_dropdown">
 									<ul class="main_menu_list ul_li">
 										<li class="active dropdown"><a class="nav-link"
-											href="subscribe_main.html" id="home_submenu"> Subscribe </a>
+											href="subscribe_main.jsp" id="home_submenu"> Subscribe </a>
 										</li>
 										<li class="dropdown"><a class="nav-link" href="#"
 											id="portfolio_submenu" role="button"
 											data-bs-toggle="dropdown" aria-expanded="false"> shop </a>
 											<ul class="submenu dropdown-menu"
 												aria-labelledby="portfolio_submenu">
-												<li><a href="shop.html">#계절별</a></li>
-												<li><a href="shop2.html">#사용자별</a></li>
-												<li><a href="shop3.html">#디카페인</a></li>
+												<li><a href="shop.jsp">#계절별</a></li>
+												<li><a href="shop2.jsp">#사용자별</a></li>
+												<li><a href="shop3.jsp">#디카페인</a></li>
 											</ul></li>
 										<li class="dropdown"><a class="nav-link" href="#"
 											id="services_submenu" role="button" data-bs-toggle="dropdown"
 											aria-expanded="false"> board </a>
 											<ul class="submenu dropdown-menu"
 												aria-labelledby="services_submenu">
-												<li><a href="reviewBoard.html">씨앗 리뷰</a></li>
-												<li><a href="blendedTeaBoard.html">새싹&나무 리뷰</a></li>
-												<li><a href="rankingBoard.html">새싹&나무 랭킹</a></li>
-												<li><a href="faq.html">F.A.Q.</a></li>
+												<li><a href="reviewBoard.jsp">씨앗 리뷰</a></li>
+												<li><a href="blendedTeaBoard.jsp">새싹&나무 리뷰</a></li>
+												<li><a href="rankingBoard.jsp">새싹&나무 랭킹</a></li>
+												<li><a href="faq.jsp">F.A.Q.</a></li>
 											</ul></li>
 										<li class="dropdown"><a class="nav-link"
-											href="magazine.html" id="experience_submenu"> Magazine </a></li>
-										<li><a class="nav-link" href="tea_finder_detail.html">Tea
+											href="magazine.jsp" id="experience_submenu"> Magazine </a></li>
+										<li><a class="nav-link" href="tea_finder_detail.do">Tea
 												finder</a></li>
 									</ul>
 								</div>
 
-								<ul class="header_btns_group ul_li_right">
-									<li>
-										<button type="button" class="main_search_btn">
-											<a class="fal fa-user" href="contact.html"
-												style="color: black;"></a>
-										</button>
-									</li>
-									<li>
-										<button type="button" class="cart_btn">
-											<i class="fal fa-shopping-bag"></i> <small
-												class="cart_counter">2</small>
-										</button>
-									</li>
-									<li><a class="btn btn_primary text-uppercase"
-										href="login.jsp">Join Us</a></li>
-								</ul>
+<ul class="header_btns_group ul_li_right">
+                    <li>
+                      <button type="button" class="main_search_btn">
+                        <a class="fal fa-user" onclick="myAndLog()" style="color: black;" ></a>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="cart_btn">
+                        <i class="fal fa-shopping-bag"></i>
+                        <small class="cart_counter">2</small>
+                      </button>
+                    </li>
+                    <li>
+                      <input type="button" id="logInOut" class="btn btn_primary text-uppercase" value="LogIN" onclick="logInOut()">
+                    </li>
+                  </ul>
 							</nav>
 						</div>
 
@@ -293,6 +328,7 @@
 						<form action="insertMember.do" method="post"
 							enctype="multipart/form-data"  accept-charset=”EUC-KR” >
 							<div class="row justify-content-center">
+				<div class="row justify-content-center">
 								<div class="col-lg-12">
 									<div class="form_item">
 										<label for="id">아이디</label> <input type="text" name="memberId"
@@ -303,16 +339,20 @@
 								<div class="col-lg-12">
 									<div class="form_item">
 										<label for="password">비밀번호</label> <input type="password"
-											name="memberPass" placeholder="password를 입력해주세요." value="">
+											name="memberPass"  id="pwd1" placeholder="password를 입력해주세요." value="">
 									</div>
 								</div>
 								<div class="col-lg-12">
 									<div class="form_item">
 										<label for="passwordCheck">비밀번호확인</label> <input
-											type="password" name="memberPassCheck"
+											type="password" name="rememberPass" id="pwd2" 
 											placeholder="password를 한번 더 입력해주세요." value="">
 									</div>
 								</div>
+								
+								<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+								<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+								
 								<div class="col-lg-12">
 									<div class="form_item">
 										<label for="name">이름</label> <input type="name"

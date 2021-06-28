@@ -31,6 +31,15 @@
 		WHERE MEMBER_ID = #{memberId}
 	]]>
 	</update>
+	
+	   <!-- 1인 1구독 -->
+      <update id="memberSub">
+      <![CDATA[
+      UPDATE MEMBER 
+      SET  MEMBER_SUB = #{memberSub}
+      WHERE MEMBER_ID = #{memberId}
+      ]]>
+   </update>
 
 	
 	<delete id="deleteMember">
@@ -57,7 +66,7 @@
       ]]>
    </select>		
 		
-		   <!--  패스워드 중복체크  ? 여기 필요할까?-->
+   <!--  패스워드 중복체크  ? 여기 필요할까?-->
    <select id="memberPasscheck" resultType="int">
       <![CDATA[   
         SELECT COUNT(*)

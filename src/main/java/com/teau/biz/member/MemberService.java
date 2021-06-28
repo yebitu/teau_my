@@ -19,5 +19,8 @@ public interface MemberService {
 	public int memberPasscheck(MemberVO vo);
 	
 	public int memberIdcheck(MemberVO vo);
+	
+	void memberSub(MemberVO vo);
+
 
 }
