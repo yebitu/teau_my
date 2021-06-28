@@ -45,13 +45,14 @@
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="assets/css/teau.css">
 
-
-     <!-- 유저 세션 받아오기 -->
+<!-- 
+  유저 세션 받아오기
   <script src="assets/js/com_lib.js"></script>
-  <!-- 제이쿼리  -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  제이쿼리 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    
-     <script type="text/javascript">
+   <script type="text/javascript">
   	$(document).ready(function(){
   		getMemberInfo();
   	});
@@ -60,7 +61,7 @@
   		var id = obj["member"].id;
   		console.log(id);
   	}
-  </script>
+  </script> -->
 
 
 </head>

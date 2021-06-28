@@ -130,7 +130,7 @@
                   </li> -->
                   <li>
                     <button type="button" class="main_search_btn">
-                      <a class="fal fa-user" href="mypage.do" style="color: black;" ></a>
+                      <a class="fal fa-user" onclick="myAndLog()" style="color: black;" ></a>
                     </button>
                   </li>
                   <li>
@@ -140,7 +140,7 @@
                     </button>
                   </li>
                   <li>
-                    <a class="btn btn_primary text-uppercase" href="login.do">Join Us</a>
+                  	<input type="button" id="logInOut" class="btn btn_primary text-uppercase" value="LogIN" onclick="logInOut()">
                   </li>
                 </ul>
               </nav>
@@ -491,21 +491,74 @@
   <!-- custom - jquery include -->
   <script src="assets/js/main.js"></script>
   
-    <!-- 유저 세션 받아오기 -->
-  <script src="assets/js/com_lib.js"></script>
+  <!-- 유저 세션 받아오기 -->
+  <script defer src="assets/js/com_lib.js"></script>
   <!-- 제이쿼리  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    
      <script type="text/javascript">
+  	
   	$(document).ready(function(){
   		getMemberInfo();
+  		console.log(id);
+  		
+  		
+  		
   	});
   	
+  	// 전역변수 id 선언
+  	let id;
+
   	function sessionCheck(obj){
-  		var id = obj["member"].memberId;
+  		if(obj["member"] != null) {  			
+  			id = obj["member"].memberId;
+  		} else{
+  			id = null;
+  		}
   		console.log(id);
+  		logText(id);
+		//무한루프
+  		//loginCheck(id); 
   	}
+  	
+  	function loginCheck(id){
+  		if(id == null) {
+  			alert("먼저 로그인 해 주세요")
+  			location.href="index.jsp";
+  		}
+  	}
+  	
+  	function logText(id){
+  		console.log(id);
+  		if(id == null) {
+  			$('#logInOut').val('로그인');
+  			
+  		} else {
+  			$('#logInOut').val('로그아웃');
+  		}
+  	}
+  	
+  	function logInOut() {
+  		
+  		if(id == null) {
+  			location.href="login.do";
+  		} else {
+  			
+  			location.href="logout.do";  		
+  			}
+  	}
+  	
+  	function myAndLog(){
+  		if(id == null) {
+  			console.log('로그인');
+  			location.href="login.do";
+  		} else if(id != null) {
+  			console.log('마이페이지');
+  			location.href="mypage.do";  		
+  			}
+  	}
+  	
   </script>
 
 </body>

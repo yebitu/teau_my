@@ -34,22 +34,7 @@
   <!-- custom - css include -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   
-  <!-- 유저 세션 받아오기 -->
-  <script src="assets/js/com_lib.js"></script>
-  <!-- 제이쿼리  -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-   
-     <script type="text/javascript">
-  	$(document).ready(function(){
-  		getMemberInfo();
-  	});
-  	
-  	function sessionCheck(obj){
-  		var id = obj["member"].id;
-  		console.log(id);
-  	}
-  </script>
+
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
@@ -68,12 +53,12 @@
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".1s">
-                <a class="item_image" href="subscribe_seed.do">
+                <a class="item_image" onclick="loginCheck(id, 'subscribe_seed.do')">
                   <img src="assets/images/blog/select_seed.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_seed.do">
+                    <a onclick="loginCheck(id, 'subscribe_seed.do')">
                       <씨앗구독> (초심자용 구독)
                     </a>
                   </h3>
@@ -88,12 +73,12 @@
 
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".2s">
-                <a class="item_image" href="subscribe_leaf.do">
+                <a class="item_image" onclick="loginCheck(id, 'subscribe_leaf.do')">
                   <img src="assets/images/blog/select_leaf.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_leaf.do">
+                    <a onclick="loginCheck(id, 'subscribe_leaf.do')">
                       <새싹구독> (중급자용 구독)
                     </a>
                   </h3>
@@ -107,12 +92,12 @@
 
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".3s">
-                <a class="item_image" href="subscribe_tree.do">
+                <a class="item_image" onclick="loginCheck(id, 'subscribe_tree.do')">
                   <img src="assets/images/blog/select_tree.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_tree.do">
+                    <a onclick="loginCheck(id, 'subscribe_tree.do')">
                       <나무구독> (고급자용 구독)
                     </a>
                   </h3>
@@ -138,5 +123,12 @@
     <!-- main body - end
       ================================================== -->
 <jsp:include page="footer.jsp"></jsp:include>
+<script type="text/javascript">
+
+/* let seed = "subscribe_seed.do";
+let leaf = "subscribe_leaf.do";
+let tree = "subscribe_tree.do"; */
+
+</script>
 </body>
 </html>

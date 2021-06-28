@@ -117,23 +117,51 @@
   <!-- custom - jquery include -->
   <script src="assets/js/main.js"></script>
   
-  <!-- 유저 세션 받아오기 -->
-  <script src="assets/js/com_lib.js"></script>
-  <!-- 제이쿼리  -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-   
-     <script type="text/javascript">
-  	$(document).ready(function(){
-  		getMemberInfo();
-  	});
+
+<script>
+
+
   	
-  	// 전역변수로 선언 
-  	let id;
-  	
-  	function sessionCheck(obj){
-  		id = obj["member"].memberId;
+  	function logText(){
   		console.log(id);
+  		
+  		if(id == null) {
+  			$('#logInOut').val('로그인');
+  			
+  		} else { // 이쪽으로 안넘어가는 이유?
+  			$('#logInOut').val('로그아웃');
+  		}
+  	}
+  	
+  	function loginCheck(idc, link){
+  		console.log(id)
+  		idc = id;
+  		console.log(id)
+  		if(id == null) {
+  			alert("먼저 로그인 해 주세요")
+  			location.href="login.do";
+  		} else {
+  			location.href = link;
+  		}
+  	}
+  	
+  	function logInOut() {
+  		
+  		if(id == null) {
+  			location.href="login.do";
+  		} else {
+  			location.href="logout.do";  		
+  			}
+  	}
+  	
+  	function myAndLog(){
+  		if(id == null) {
+  			console.log('로그인');
+  			location.href="login.do";
+  		} else if(id != null) {
+  			console.log('마이페이지');
+  			location.href="mypage.do";  		
+  			}
   	}
   </script>
 
