@@ -41,7 +41,7 @@ public class SubController {
 	@RequestMapping("/subscribe_main.do")
 	public String main() {
 		
-		return "WEB-INF/JSP/subscribe_main.jsp";
+		return "subscribe_main";
 	}
 	
 	// 씨앗 구독
@@ -51,7 +51,7 @@ public class SubController {
 			HttpSession session = request.getSession();
 			MemberVO member = (MemberVO)session.getAttribute("member");
 			model.addAttribute("member", member);
-			return "WEB-INF/JSP/subscribe_seed.jsp";
+			return "subscribe_seed";
 		}
 		
 		// 씨앗구독 수정
@@ -83,7 +83,7 @@ public class SubController {
 			HttpSession session = request.getSession();
 			MemberVO member = (MemberVO)session.getAttribute("member");
 			model.addAttribute("member", member);
-			return "WEB-INF/JSP/subscribe_leaf.jsp";
+			return "subscribe_leaf";
 		}
 	
 	
@@ -124,7 +124,7 @@ public class SubController {
 //		model.addAttribute("teaList", treeService.getTeaList());
 //		return "WEB-INF/JSP/subscribe_tree.jsp";
 		// getTeaList에서 세션의 User 객체 뽑아온다 
-		return "/getTeaList.do";
+		return "forward:getTeaList.do";
 	}
 	
 	// 수정 
@@ -174,6 +174,6 @@ public class SubController {
 		}
 		
 		
-		return "WEB-INF/JSP/mypage.jsp";
+		return "mypage";
 	}
 }

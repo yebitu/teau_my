@@ -116,7 +116,8 @@
                       <hr class="hi hr">
                       
                       <ul class="hi list-menu">
-                        <li><a href="mypage_edit.html">회원정보 변경</a></li>
+                        <li><a href="mypage_edit.do">회원정보 변경</a></li>
+                        <li><a href="#" onclick="deleteMem()">회원탈퇴</a></li>
                       </ul>
                     </div>  </div>
                 </div>
@@ -395,6 +396,12 @@ function deletesub(){
 		}
 	} 
 	
+}
+
+function deleteMem(){
+	if(confirm("정말로 탈퇴하시겠습니까?") == true){
+		location.href= "deleteMember.do";
+	}
 }
 
 </script>

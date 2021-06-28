@@ -14,5 +14,10 @@ public interface MemberService {
 	MemberVO getMember(MemberVO vo);
 	
 	List<MemberVO> getMemberList(MemberVO vo);
+	
+	// 추가
+	public int memberPasscheck(MemberVO vo);
+	
+	public int memberIdcheck(MemberVO vo);
 
 }

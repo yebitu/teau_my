@@ -134,8 +134,7 @@
   	}
   	
   	function loginCheck(idc, link){
-  		console.log(id)
-  		idc = id;
+  		//idc = id;
   		console.log(id)
   		if(id == null) {
   			alert("먼저 로그인 해 주세요")

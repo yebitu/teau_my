@@ -63,7 +63,7 @@ public class TreeController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		// 1인 1구독 체크 해제
 		if(member != null) {			
-			member.setMemberSub("1");
+			member.setMemberSub("0");
 			}
 		
 		SubVO vo = new SubVO();
@@ -73,8 +73,8 @@ public class TreeController {
 		
 		treeService.deleteSub(vo);
 		// 구독 삭제 후 페이지(구독 창 없는 마이페이지?)
-		return "WEB-INF/JSP/mypage.jsp";
-//		return "redirect:mypage.do";
+		//return "mypage";
+		return "redirect:mypage.do";
 	}
 	
 	@RequestMapping("/getSubTree.do")
@@ -100,8 +100,7 @@ public class TreeController {
 //		model.addAttribute("member", member);
 //		System.out.println("현재 로그인 중인 멤버 아이디"+(member.getMemberId()));
 		
-		
-		return "WEB-INF/JSP/subscribe_tree.jsp";
+		return "subscribe_tree";
 	}
 
 	

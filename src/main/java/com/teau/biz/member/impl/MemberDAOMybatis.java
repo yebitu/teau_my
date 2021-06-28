@@ -33,5 +33,16 @@ public class MemberDAOMybatis {
 	public  List<MemberVO> getMemberList(MemberVO vo){
 		return mybatis.selectList("MemberDAO.getMemberList", vo);
 	}
+	
+	//
+	public int memberPasscheck(MemberVO vo) {
+		int result = mybatis.selectOne("MemberDAO.memberPasscheck", vo);
+		return result;	
+	}
+	
+	public int memberIdcheck(MemberVO vo) {
+		int result = mybatis.selectOne("MemberDAO.memberIdcheck", vo);
+		return result;	
+	}
 
 }

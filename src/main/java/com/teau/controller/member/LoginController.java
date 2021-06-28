@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teau.biz.member.MemberService;
 import com.teau.biz.member.MemberVO;
@@ -19,7 +20,8 @@ public class LoginController {
 	MemberService memberService;
 	
 	
-	// 진주님거 참고
+	// 구독
+	
 	@RequestMapping("/loginView.do")
 	// "memberId"의 파라미터를 요청해서 String id에 넣어달라(폼에서 사용자가 작성한 memberId가 넘어오게 된다)
 	public String loginView(@RequestParam("memberId")String id, @RequestParam("memberPass")String password, HttpSession session) {
@@ -39,8 +41,12 @@ public class LoginController {
 		if(id.equals(member.getMemberId()) && password.equals(member.getMemberPass())) {
 			session.setAttribute("member", member);
 			System.out.println(member.getMemberId());
+			System.out.println("로그인 성공");
 			return "redirect:index.jsp";
+			
 		} else {
+			
+			System.out.println("아이디 또는 비밀번호가 잘못되었습니다");
 			return "redirect:login.do";
 		}
 				
@@ -49,16 +55,13 @@ public class LoginController {
 	// 로그인 상태와 비로그인 상태 구분?
 	@RequestMapping("/login.do")
 	public String login() {
-		return "WEB-INF/JSP/login.jsp";
+		return "login";
 	}
 	
-	@RequestMapping("/signup.do")
-	public String signUp() {
-		return "WEB-INF/JSP/signup.jsp";
-	}
+
 
 	/*
-	 * // 영태 현규거 참고
+	 * // 유저 참고
 	 * 
 	 * @RequestMapping(value="/login.do", method=RequestMethod.GET) public String
 	 * loginView(@ModelAttribute("member")MemberVO vo) { vo.setMemberId("test");
@@ -79,7 +82,7 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 성공");
 		session.invalidate();
-		return "index.jsp";
+		return "redirect:index.jsp";
 	}
 
 }

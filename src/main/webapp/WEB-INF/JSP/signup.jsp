@@ -129,7 +129,7 @@
               </div>
             </form>
               <!-- <div class="text-center" style="margin-top: 5%;">
-                <a href="./join.html">Log In</a>
+                <a href="./join.jsp">Log In</a>
               </div> -->
           </div>
         </div>

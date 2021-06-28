@@ -40,5 +40,15 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> getMemberList(MemberVO vo) {
 		return MemberDAO.getMemberList(vo);
 	}
+	
+	public int memberPasscheck(MemberVO vo) {
+		int result = MemberDAO.memberPasscheck(vo);	
+		return result;
+	}
+	
+	public int memberIdcheck(MemberVO vo) {
+		int result = MemberDAO.memberIdcheck(vo);	
+		return result;
+	}
 
 }

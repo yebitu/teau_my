@@ -266,23 +266,9 @@
 
   $(document).ready(function () {
     	
-    	//각각 체크박스를 클릭시 체크 알아보게 변화
-/*         $("input:checkbox").on("click", function () {
-          // chkGoodsList.push($(this).val());
-          if($(this).is(":checked") == true){
-            $(this).parents('li').addClass('selected');
-          } else {
-            $(this).parents('li').removeClass('selected');
-          }
-          //
-          // return false;
-          // $(this).parents('li').toggleClass('selected');
-        });
-       */
-      
 
       // 업데이트 시 기존 사용자의 선택 불러오기(오류 수정)
-      var data = <%=data%>;
+      let data = <%=data%>;
       console.log(data);
       
       if(data != null){
@@ -450,6 +436,7 @@
     	let subCheck = $('#subCheck').val();
     	//let subCheck = $('#subCheck').val();
     	let data = <%=data%>;
+    	console.log(data);
     	if(data == null) {
     		// 사용자가 보낸 정보가 없으면 구독 내역 있는지 체크(1인 1구독)    		
     		if(subCheck == 1){
@@ -481,7 +468,8 @@
               
               success: function(data) {
                  alert(data);
-                 window.location.href = "getSubTree.do"; //JSP 이동 페이지 적기  
+                 //window.location.href = "getSubTree.do"; //JSP 이동 페이지 적기  
+                 window.location.href = "mypage.do"; //JSP 이동 페이지 적기  
               }, 
               error: function(e) {
                  console.log(e);

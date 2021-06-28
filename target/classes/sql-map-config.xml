@@ -20,8 +20,6 @@
 	<mappers>
 		<mapper resource="mappings/subscribe-mapping.xml" />
  		<mapper resource="mappings/member-mapping.xml" />
-		
-		
 	</mappers>
 </configuration>
 
