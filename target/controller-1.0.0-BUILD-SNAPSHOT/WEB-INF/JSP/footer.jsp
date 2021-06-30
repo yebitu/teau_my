@@ -116,6 +116,53 @@
 
   <!-- custom - jquery include -->
   <script src="assets/js/main.js"></script>
+  
+
+<script>
+
+
+  	
+  	function logText(){
+  		console.log(id);
+  		
+  		if(id == null) {
+  			$('#logInOut').val('로그인');
+  			
+  		} else { // 이쪽으로 안넘어가는 이유?
+  			$('#logInOut').val('로그아웃');
+  		}
+  	}
+  	
+  	function loginCheck(idc, link){
+  		//idc = id;
+  		console.log(id)
+  		if(id == null) {
+  			alert("먼저 로그인 해 주세요")
+  			location.href="login.do";
+  		} else {
+  			location.href = link;
+  		}
+  	}
+  	
+  	function logInOut() {
+  		
+  		if(id == null) {
+  			location.href="login.do";
+  		} else {
+  			location.href="logout.do";  		
+  			}
+  	}
+  	
+  	function mypage(){
+  		if(id == null) {
+  			console.log('로그인');
+  			location.href="login.do";
+  		} else if(id != null) {
+  			console.log('마이페이지');
+  			location.href="mypage.do";  		
+  			}
+  	}
+  </script>
 
 </body>
 </html>

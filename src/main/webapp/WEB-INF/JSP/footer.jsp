@@ -153,7 +153,7 @@
   			}
   	}
   	
-  	function myAndLog(){
+  	function mypage(){
   		if(id == null) {
   			console.log('로그인');
   			location.href="login.do";

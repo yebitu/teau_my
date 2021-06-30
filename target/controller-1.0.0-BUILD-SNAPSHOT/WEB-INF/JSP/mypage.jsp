@@ -38,6 +38,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/teau.css"> 
   </head>
 <body>
+
 <jsp:include page="header.jsp"></jsp:include>
     <!-- contact_section - start
         ================================================== -->  
@@ -116,7 +117,8 @@
                       <hr class="hi hr">
                       
                       <ul class="hi list-menu">
-                        <li><a href="mypage_edit.html">회원정보 변경</a></li>
+                        <li><a href="mypage_edit.do">회원정보 변경</a></li>
+                        <li><a href="#" onclick="deleteMem()">회원탈퇴</a></li>
                       </ul>
                     </div>  </div>
                 </div>
@@ -132,7 +134,7 @@
           <br>
           
           <!-- 구독정보 -->
-        <div id="subscribe_order" class="container">
+        <div  id="subscribe_order" class="container">
           <div class="contact_form bg_white">
             <h3>구독 정보</h3><br>
             <ul>
@@ -326,14 +328,18 @@
 <script>
 
  
- $(document).ready(function(){
-	 
+	$(document).ready(function() {
 	 // 구독 내역 없을 시 구독정보 박스 숨기기
-	 var sub_order;
-	 if("${sub.orderCate}" == null){
+	 
+	 console.log("${sub.orderCate}");
+	 if("${sub.orderCate}" == ""){
+		 //document.getElementByid("subscribe_order").sytle.display="none";
 		 $("#subscribe_order").hide();
+		 
 	 } else {
+		 //document.getElementByid("subscribe_order").sytle.display="none";
 		 $("#subscribe_order").show();
+		 
 	 }
  })
 
@@ -391,6 +397,12 @@ function deletesub(){
 		}
 	} 
 	
+}
+
+function deleteMem(){
+	if(confirm("정말로 탈퇴하시겠습니까?") == true){
+		location.href= "deleteMember.do";
+	}
 }
 
 </script>

@@ -249,6 +249,7 @@
 				// 사용자가 보낸 정보가 없으면 구독 내역 있는지 체크(1인 1구독)
 				if(subCheck == 1){
 					alert("이미 구독 중인 상품이 있습니다.")
+					location.href="index.jsp"
 				} else{
 				// 구독 내역 없으면 insert
 				var insert = 'insertSubSeed.do'

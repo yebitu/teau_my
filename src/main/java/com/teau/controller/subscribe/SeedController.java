@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teau.biz.subscribe.SubService;
 import com.teau.biz.subscribe.SubVO;
+import com.teau.biz.member.MemberService;
 import com.teau.biz.member.MemberVO;
 
 @Controller
@@ -22,6 +23,9 @@ public class SeedController {
 	@Autowired
 	@Qualifier("seedService")
 	private SubService seedService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	// 구독 등록
 	@RequestMapping(value = "/insertSubSeed.do", produces = "application/json; charset=utf8")
@@ -30,12 +34,11 @@ public class SeedController {
 		// 구독 구분을 위해 세션에서 멤버 객체 뽑아오기
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		if(member != null) {			
-		member.setMemberSub("1");
-		}
-		
+				
 		seedService.insertSub(vo);
-		System.out.println("Controller 삽입");
+		System.out.println("씨앗구독 성공");
+		member.setMemberSub("1");
+		memberService.memberSub(member);	
 		return "씨앗구독 신청이 완료되었습니다.";
 	}
 
@@ -53,13 +56,15 @@ public class SeedController {
 	public String deleteSub(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		// 1인 1구독 체크 해제
-		member.setMemberSub("0");
 		
 		SubVO vo = new SubVO();
 		vo.setSubUser(member.getMemberId());
-		System.out.println(member.getMemberId());
+//		System.out.println(member.getMemberId());
 		seedService.deleteSub(vo);
+		
+		// 1인 1구독 체크 해제
+		member.setMemberSub("0");
+		memberService.memberSub(member);
 		return "redirect:mypage.do";
 	}
 

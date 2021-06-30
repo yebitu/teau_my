@@ -66,7 +66,7 @@
 
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
     <!-- breadcrumb_section - start
         ================================================== -->
       <section class="breadcrumb_section text-uppercase"
@@ -99,7 +99,7 @@
         <div class="reserve_table_form wow fadeInUp bg-white" style="padding-left: 0px; padding-right: 0px;"
           data-wow-delay=".1s">
           <div class="subcribe_title">
-              <h2 class="form_title text-center text-uppercase" style="font-size: 35px;">원하는 항목을 골라보세요(중복가능)</h2>
+              <h2 class="form_title text-center text-uppercase" style="font-size: 2rem;">원하는 항목을 10개 골라보세요</h2>
             </div>
             
             
@@ -111,7 +111,7 @@
             
             <div class="row justify-content-center">
               <div id="tt_base" class="sub_tree">
-                <p class="sub_tree_title">베이스 선택</p>
+                <p class="sub_tree_title" style="font-size: 1.7rem; ">베이스 선택</p>
 
                 <div class="list_wrap">
                   <ul>
@@ -315,6 +315,13 @@
 			});    	  
     	  
     	  }
+    	  
+    	  // 기존 선택된 상품에 체크표시
+    	   $('input:checkbox:checked').each(function() {
+		      $(this).parents('li').addClass('selected');
+		      $(this).siblings('.tt_explain').css({"color": "#aaa"});
+		   	 });
+    	  
       }
       
       //insert와 update 구분 
@@ -326,6 +333,8 @@
     	  $("#btn_subSubmit").val("나무 구독수정")  
       }
       
+      
+      
 
       // 베이스 선택
       $("input:checkbox[name='treeSelect']").on("click", function () {
@@ -335,6 +344,8 @@
         if (chkCntBs > 3) {
             $(this).prop("checked", false);
             $(this).parents('li').removeClass('selected');
+           /*  $(this).siblings('.tt_explain').css({"color": "#fff"}); */
+       
             alert("베이스는 3개까지만 선택할 수 있습니다.");
             return false;
           } else {
@@ -342,6 +353,7 @@
               chkGoodsList.push($(this).val());
               console.log(chkGoodsList);
               $(this).parents('li').addClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#aaa"});
             } else {
               for(var i = 0; i < chkGoodsList.length; i++) {
                 if(chkGoodsList[i] == $(this).val()) {
@@ -351,6 +363,7 @@
                 }
               }
               $(this).parents('li').removeClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#fff"});
             }
 
           } 
@@ -368,8 +381,10 @@
               // chkGoodsList.push($(this).val());
               // console.log(chkGoodsList);
               $(this).parents('li').addClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#aaa"});
             } else {
               $(this).parents('li').removeClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#fff"});
             }
 
             }
@@ -389,6 +404,7 @@
           price = parseInt(price);
           
           if($('#'+this.id).is(":checked")== true){
+        	$(this).parents('li').addClass('selected');  
         	if(this.id == 'tt_49') {
             	price1 = $('#price49').val();
   	            price1 = parseInt(price1);
@@ -400,10 +416,11 @@
             	price1 = parseInt(price1);
         	}
             price += price1;
-            console.log("49번 플러스");
+            console.log("추가가격 플러스");
             console.log("+"+price1);
             console.log(price);
           } else {
+        	  $(this).parents('li').removeClass('selected');
         	  if(this.id == 'tt_49') {
               	price1 = $('#price49').val();
   	            price1 = parseInt(price1);
@@ -415,7 +432,7 @@
               	price1 = parseInt(price1);
           	}
             price -= price1;
-            console.log("49번 선택 해제");
+            console.log("추가가격 마이너스");
             console.log("-"+price1);
             console.log(price);
           }
@@ -441,6 +458,7 @@
     		// 사용자가 보낸 정보가 없으면 구독 내역 있는지 체크(1인 1구독)    		
     		if(subCheck == 1){
     			alert("이미 구독 중인 상품이 있습니다");
+    			location.href="index.jsp"
     		} else{
     		// 구독 내역 없으면 insert
     		let insert = 'insertSubTree.do'

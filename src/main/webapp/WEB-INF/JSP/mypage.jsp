@@ -38,6 +38,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/teau.css"> 
   </head>
 <body>
+
 <jsp:include page="header.jsp"></jsp:include>
     <!-- contact_section - start
         ================================================== -->  

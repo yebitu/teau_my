@@ -1,8 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+					  "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <body>
+
+  <!-- 유저 세션 받아오기 -->
+  <script src="assets/js/com_lib.js"></script>
+  <!-- 제이쿼리  -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
+     <script type="text/javascript">
+   	$(document).ready(function(){
+  		getMemberInfo();
+  		/* logText(); */
+  		console.log(id);
+  		
+  		
+  	});
+  	
+  	// 전역변수 id 선언
+  	let id;
+  	
+
+  	// 세션체크 JSON 전송
+  	function sessionCheck(obj){
+  		if(obj["member"] != null) {  			
+  			id = obj["member"].memberId;
+  		} else{
+  			id = null;
+  		}
+  		console.log(id);
+  		logText(id);
+  	}
+  	
+  	/*   	function sessionCheck(obj){
+  		id = obj["member"].memberId;
+  		console.log(id);
+  		
+  	} */
+  	
+  	</script>
+
+
+
  <!-- body_wrap - start -->
   <div class="body_wrap">
 
@@ -66,10 +109,10 @@
                           board
                         </a>
                         <ul class="submenu dropdown-menu" aria-labelledby="services_submenu">
-                          <li><a href="reviewBoard.do">씨앗 리뷰</a></li>
-                          <li><a href="blendedTeaBoard.do">새싹&나무 리뷰</a></li>
-                          <li><a href="rankingBoard.do">새싹&나무 랭킹</a></li>
-                          <li><a href="faq.do">F.A.Q.</a></li>
+                          <li><a href="toBoard.do">씨앗 리뷰</a></li>
+                            <li><a href="tbBoard.do">새싹&나무 리뷰</a></li>
+                            <li><a href="rankBoard.do">새싹&나무 랭킹</a></li>
+                            <li><a href="faq.html">F.A.Q.</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
@@ -86,7 +129,7 @@
                   <ul class="header_btns_group ul_li_right">
                     <li>
                       <button type="button" class="main_search_btn">
-                        <a class="fal fa-user" href="mypage.do" style="color: black;" ></a>
+                        <a class="fal fa-user" onclick="mypage()" style="color: black;" ></a>
                       </button>
                     </li>
                     <li>
@@ -96,7 +139,7 @@
                       </button>
                     </li>
                     <li>
-                      <a class="btn btn_primary text-uppercase" href="login.do">LOGIN</a>
+                      <input type="button" id="logInOut" class="btn btn_primary text-uppercase" value="LogIN" onclick="logInOut()">
                     </li>
                   </ul>
                 </nav>

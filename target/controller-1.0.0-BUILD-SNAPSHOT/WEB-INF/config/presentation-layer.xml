@@ -12,10 +12,35 @@
    <context:component-scan base-package="com.teau.controller"></context:component-scan>
    <mvc:annotation-driven></mvc:annotation-driven>
    
+   
+    <!-- 뷰 리솔버 설정  -->
+  	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/JSP/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+   
    <!-- 파일 업로드 설정 (id 값 고정)-->
-   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+<!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
    <property name="maxUploadSize" value="100000"></property>
-   </bean>
+   </bean> -->
+   
+   <!-- 업로드 패스 설정 -->
+	<bean class="java.lang.String" id="uploadPath">
+		<constructor-arg value="D:/DEV2/workspace/TeaU/src/main/webapp/resource/imgUpload" />
+
+	</bean>
+
+	<!-- 일반 파일 업로드 경로 
+	<mvc:resources mapping="/imgUpload/**" location="/resources/imgUpload/" /> -->
+
+	<mvc:resources mapping="resource/imgUpload/" location="resource/imgUpload/" />
+
+
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+
+   
    
    <!-- 예외 처리 설정 -->
    <!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -51,6 +76,9 @@
          <property name="paramName" value="lang"></property>
       </bean>
    </mvc:interceptors>
+   
+   
+   
 </beans>
 
 

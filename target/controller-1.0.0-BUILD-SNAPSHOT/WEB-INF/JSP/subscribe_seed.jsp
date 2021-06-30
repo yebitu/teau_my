@@ -89,6 +89,8 @@
 					<form action="insertSubSeed.do" id="insertForm" method="POST">
 						<input type="hidden" id="subUser" name="subUser"
 							value="${member.memberId}" />
+						<input type="hidden" id="subCheck" name="subCheck"
+							value="${member.memberSub}" />
 						<div class="row justify-content-center">
 
 
@@ -239,11 +241,19 @@
 		
 		// insert , update 경로 구분
 		function inORUp(){
-			var data = <%=data%>;
+			let data = <%=data%>;
+			let subCheck = $('#subCheck').val();
+			
 			if(data == null) {
-				// 사용자가 보낸 정보가 없으면 insert
+				
+				// 사용자가 보낸 정보가 없으면 구독 내역 있는지 체크(1인 1구독)
+				if(subCheck == 1){
+					alert("이미 구독 중인 상품이 있습니다.")
+				} else{
+				// 구독 내역 없으면 insert
 				var insert = 'insertSubSeed.do'
 				checkbox(insert);
+				}
 			} else {
 				// 사용자가 보낸 정보가 있으면 update
 				var update = 'updateSubSeed.do'

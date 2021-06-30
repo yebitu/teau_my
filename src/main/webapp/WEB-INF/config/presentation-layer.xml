@@ -12,6 +12,13 @@
    <context:component-scan base-package="com.teau.controller"></context:component-scan>
    <mvc:annotation-driven></mvc:annotation-driven>
    
+   
+    <!-- 뷰 리솔버 설정  -->
+  	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/JSP/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+   
    <!-- 파일 업로드 설정 (id 값 고정)-->
 <!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
    <property name="maxUploadSize" value="100000"></property>
@@ -19,7 +26,7 @@
    
    <!-- 업로드 패스 설정 -->
 	<bean class="java.lang.String" id="uploadPath">
-		<constructor-arg value="F:/eclipse-workspace/TeaU/src/main/webapp/resource/imgUpload" />
+		<constructor-arg value="D:/DEV2/workspace/TeaU/src/main/webapp/resource/imgUpload" />
 
 	</bean>
 

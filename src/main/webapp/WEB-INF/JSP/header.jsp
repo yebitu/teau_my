@@ -16,7 +16,9 @@
    	$(document).ready(function(){
   		getMemberInfo();
   		/* logText(); */
-  		console.log(id);
+  		if(id != null ){
+  		console.log(id);  			
+  		}
   		
   		
   	});
@@ -98,9 +100,9 @@
                           shop
                         </a>
                         <ul class="submenu dropdown-menu" aria-labelledby="portfolio_submenu">
-                          <li><a href="shop.do">#계절별</a></li>
-                          <li><a href="shop2.do">#사용자별</a></li>
-                          <li><a href="shop3.do">#디카페인</a></li>
+                          <li><a href="shopseason.do">#계절</a></li>
+                          <li><a href="shopuser.do">#사용자</a></li>
+                          <li><a href="shopbase.do">#베이스</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
@@ -109,10 +111,10 @@
                           board
                         </a>
                         <ul class="submenu dropdown-menu" aria-labelledby="services_submenu">
-                          <li><a href="reviewBoard.do">씨앗 리뷰</a></li>
-                          <li><a href="blendedTeaBoard.do">새싹&나무 리뷰</a></li>
-                          <li><a href="rankingBoard.do">새싹&나무 랭킹</a></li>
-                          <li><a href="faq.do">F.A.Q.</a></li>
+                          <li><a href="toBoard.do">씨앗 리뷰</a></li>
+                            <li><a href="tbBoard.do">새싹&나무 리뷰</a></li>
+                            <li><a href="rankBoard.do">새싹&나무 랭킹</a></li>
+                            <li><a href="faq.html">F.A.Q.</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
@@ -129,7 +131,7 @@
                   <ul class="header_btns_group ul_li_right">
                     <li>
                       <button type="button" class="main_search_btn">
-                        <a class="fal fa-user" onclick="myAndLog()" style="color: black;" ></a>
+                        <a class="fal fa-user" onclick="mypage()" style="color: black;" ></a>
                       </button>
                     </li>
                     <li>

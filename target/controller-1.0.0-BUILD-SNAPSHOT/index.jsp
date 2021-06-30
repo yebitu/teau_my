@@ -44,207 +44,7 @@
 
 <body>
 
-  <!-- body_wrap - strart -->
-  <div class="body_wrap">
-
-    <!-- backtotop - start -->
-    <div class="backtotop">
-      <a href="#" class="scroll">
-        <i class="far fa-arrow-up"></i>
-        <i class="far fa-arrow-up"></i>
-      </a>
-    </div>
-    <!-- backtotop - end -->
-
-    <!-- preloader - start -->
-    <div id="preloader"></div>
-    <!-- preloader - end -->
-
-    <!-- header_section - start
-      ================================================== -->
-    <header class="header_section style_3">
-      <div class="content_wrap">
-        <div class="container maxw_1720">
-          <div class="row align-items-center">
-
-            <div class="col-lg-2 col-md-6 col-6">
-              <div class="brand_logo">
-                <a class="brand_link" href="index.jsp">
-                  <img src="assets/images/logo/TeaU.png"
-                    alt="logo_not_found">
-                </a>
-              </div>
-            </div>
-
-            <div class="col-lg-10 col-md-6 col-6">
-              <nav class="main_menu navbar navbar-expand-lg">
-                <button class="mobile_menu_btn navbar-toggler" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#main_menu_dropdown" aria-controls="main_menu_dropdown" aria-expanded="false"
-                  aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"><i class="fal fa-bars"></i></span>
-                </button>
-                <div class="main_menu_inner collapse navbar-collapse" id="main_menu_dropdown">
-                  <ul class="main_menu_list ul_li">
-                    <li class="active dropdown">
-                      <a class="nav-link" href="subscribe_main.do" id="home_submenu">
-                        Subscribe
-                      </a>
-                    </li>
-                    <li class="dropdown">
-                      <a class="nav-link" href="#" id="portfolio_submenu" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        shop
-                      </a>
-                      <ul class="submenu dropdown-menu" aria-labelledby="portfolio_submenu">
-                        <li><a href="shop.do">#계절별</a></li>
-                        <li><a href="shop2.do">#사용자별</a></li>
-                        <li><a href="shop3.do">#디카페인</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a class="nav-link" href="#" id="services_submenu" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        board
-                      </a>
-                      <ul class="submenu dropdown-menu" aria-labelledby="services_submenu">
-                        <li><a href="reviewBoard.do">씨앗 리뷰</a></li>
-                        <li><a href="blendedTeaBoard.do">새싹&나무 리뷰</a></li>
-                        <li><a href="rankingBoard.do">새싹&나무 랭킹</a></li>
-                        <li><a href="faq.do">F.A.Q.</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a class="nav-link" href="magazine.do" id="experience_submenu">
-                        Magazine
-                      </a>
-                    </li>
-                    <li>
-                      <a class="nav-link" href="tea_finder_detail.do">Tea finder</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <ul class="header_btns_group ul_li_right">
-                  <!-- <li>
-                  <a>ㅇㅇ님 환영합니다</a>
-                  </li> -->
-                  <li>
-                    <button type="button" class="main_search_btn">
-                      <a class="fal fa-user" href="mypage.do" style="color: black;" ></a>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="cart_btn">
-                      <i class="fal fa-shopping-bag"></i>
-                      <small class="cart_counter">2</small>
-                    </button>
-                  </li>
-                  <li>
-                    <a class="btn btn_primary text-uppercase" href="login.do">Join Us</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- collapse search - start -->
-      <div class="main_search_collapse collapse" id="main_search_collapse">
-        <div class="main_search_form card">
-          <div class="container maxw_1560">
-            <form action="#">
-              <div class="form_item">
-                <input type="search" name="search" placeholder="Search here...">
-                <button type="submit" class="submit_btn"><i class="fal fa-search"></i></button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- collapse search - end -->
-    </header>
-    <!-- header_section - end
-      ================================================== -->
-
-    <!-- main body - start
-      ================================================== -->
-    <main>
-
-      <!-- cart_sidebar - start
-        ================================================== -->
-      <div class="sidebar-menu-wrapper">
-        <div class="cart_sidebar">
-          <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
-          <h2 class="heading_title text-uppercase">Cart Items - <span>4</span></h2>
-
-          <div class="cart_items_list">
-            <div class="cart_item">
-              <div class="item_image">
-                <img src="assets/images/recent_post/img_03.jpg" alt="image_not_found">
-              </div>
-              <div class="item_content">
-                <h4 class="item_title">
-                  Rorem ipsum dolor sit amet, sectetur adipisi cingey.
-                </h4>
-                <span class="item_price">$19.00</span>
-                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-              </div>
-            </div>
-
-            <div class="cart_item">
-              <div class="item_image">
-                <img src="assets/images/recent_post/img_04.jpg" alt="image_not_found">
-              </div>
-              <div class="item_content">
-                <h4 class="item_title">
-                  Rorem ipsum dolor sit amet, sectetur adipisi cingey.
-                </h4>
-                <span class="item_price">$19.00</span>
-                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-              </div>
-            </div>
-
-            <div class="cart_item">
-              <div class="item_image">
-                <img src="assets/images/recent_post/img_05.jpg" alt="image_not_found">
-              </div>
-              <div class="item_content">
-                <h4 class="item_title">
-                  Rorem ipsum dolor sit amet, sectetur adipisi cingey.
-                </h4>
-                <span class="item_price">$19.00</span>
-                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-              </div>
-            </div>
-
-            <div class="cart_item">
-              <div class="item_image">
-                <img src="assets/images/recent_post/img_06.jpg" alt="image_not_found">
-              </div>
-              <div class="item_content">
-                <h4 class="item_title">
-                  Rorem ipsum dolor sit amet, sectetur adipisi cingey.
-                </h4>
-                <span class="item_price">$19.00</span>
-                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="total_price text-uppercase">
-            <span>Sub Total:</span>
-            <span>$76.00</span>
-          </div>
-          <ul class="btns_group ul_li">
-            <li><a href="cart.do" class="btn btn_primary text-uppercase">View Cart</a></li>
-            <li><a href="checkout.do" class="btn btn_border border_black text-uppercase">Checkout</a></li>
-          </ul>
-        </div>
-        <div class="cart_sidebar_overlay"></div>
-      </div>
-      <!-- cart_sidebar - end
-        ================================================== -->
+<jsp:include page="/WEB-INF/JSP/header.jsp"></jsp:include>
 
       <!-- slider_section - start
         ================================================== -->
@@ -381,81 +181,8 @@
 
   <!-- footer_section - start
       ================================================== -->
-  <footer class="footer_section">
-    <div class="footer_widget_area" >
-      <div class="container">
-      
+<jsp:include page="/WEB-INF/JSP/footer.jsp"></jsp:include>
 
-        <div class="row justify-content-lg-between">
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="footer_widget footer_about wow fadeInUp" data-wow-delay=".1s">
-              <div class="brand_logo">
-                <a class="brand_link" href="index.jsp">
-                  <img src="assets/images/logo/TeaU.png" srcset="assets/images/logo/logo_black_2x.png 2x"
-                    alt="logo_not_found">
-                </a>
-              </div>
-
-              <ul class="social_links social_icons ul_li">
-                <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://twitter.com/?lang=ko" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="footer_widget footer_contact wow fadeInUp" data-wow-delay=".2s">
-              <h3 class="footer_widget_title text-uppercase">Contact us</h3>
-              <ul class="ul_li_block">
-                <li><strong class="text-uppercase">Adress:</strong> 8638 Amarica Stranfod Mailbon Star</li>
-                <li><strong class="text-uppercase">Mail:</strong> Israfilsupol836@gmail.com</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-4 col-sm-6">
-            <div class="footer_widget footer_recent_post wow fadeInUp" data-wow-delay=".4s">
-              <h3 class="footer_widget_title text-uppercase" id="footerc">RECENT MAGAZINE</h3>
-
-              <div class="recent_post" >
-                <a class="item_image" href="magazine.do">
-                  <img src="assets/images/blog/2.jpg" alt="image_not_found"  style="width: 75px; height: 75px;" > 
-                </a>
-                <div class="item_content">
-                  <h4 class="item_title">
-                    <a href="magazine.do" style="font-size: 11px;">차를 맛있게 마시는 방법들!</a>
-                  </h4>
-                  <span class="post_date text-uppercase">December 30 - 2021</span>
-                </div>
-              </div>
-
-              <div class="recent_post">
-                <a class="item_image" href="magazine.do">
-                  <img src="assets/images/blog/1.jpg" alt="image_not_found"  style="width: 75px; height: 75px;">
-                </a>
-                <div class="item_content">
-                  <h4 class="item_title">
-                    <a href="magazine.do" style="font-size: 11px;">블렌딩이란?</a>
-                  </h4>
-                  <span class="post_date text-uppercase">Nobember 30 - 2021</span>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer_bottom text-center">
-      <div class="container">
-        <p class="copyright_text mb-0">Copyright@ 2021 Desing by <a
-            href="https://themeforest.net/user/xpressrow">Girl's Main</a></p>
-      </div>
-    </div>
-  </footer>
   <!-- footer_section - end
       ================================================== -->
 
@@ -490,6 +217,76 @@
 
   <!-- custom - jquery include -->
   <script src="assets/js/main.js"></script>
+  
+  <!-- 유저 세션 받아오기 -->
+  <script defer src="assets/js/com_lib.js"></script>
+  <!-- 제이쿼리  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
+     <script type="text/javascript">
+  	
+  	$(document).ready(function(){
+  		getMemberInfo();
+  		console.log(id);
+  		
+  		
+  		
+  	});
+  	
+  	// 전역변수 id 선언
+  	let id;
+
+  	function sessionCheck(obj){
+  		if(obj["member"] != null) {  			
+  			id = obj["member"].memberId;
+  		} else{
+  			id = null;
+  		}
+  		console.log(id);
+  		logText(id);
+		//무한루프
+  		//loginCheck(id); 
+  	}
+  	
+  	function loginCheck(id){
+  		if(id == null) {
+  			alert("먼저 로그인 해 주세요")
+  			location.href="index.jsp";
+  		}
+  	}
+  	
+  	function logText(id){
+  		console.log(id);
+  		if(id == null) {
+  			$('#logInOut').val('로그인');
+  			
+  		} else {
+  			$('#logInOut').val('로그아웃');
+  		}
+  	}
+  	
+  	function logInOut() {
+  		
+  		if(id == null) {
+  			location.href="login.do";
+  		} else {
+  			
+  			location.href="logout.do";  		
+  			}
+  	}
+  	
+  	function myAndLog(){
+  		if(id == null) {
+  			console.log('로그인');
+  			location.href="login.do";
+  		} else if(id != null) {
+  			console.log('마이페이지');
+  			location.href="mypage.do";  		
+  			}
+  	}
+  	
+  </script>
 
 </body>
 

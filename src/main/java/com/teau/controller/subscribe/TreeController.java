@@ -30,31 +30,28 @@ public class TreeController {
 	@Autowired
 	private MemberService memberService;
 	
+	//등록
     @RequestMapping(value="/insertSubTree.do", produces="application/json; charset=utf8")
 	@ResponseBody // Viewresolver로 넘어가는 것을 막기 위해, json형태로 받음. 그래서 json형태로 받은 것을 modelAtrribute를 통해 vo객체에 담아준다-인서트하기 위해서
 	
 	public String insertSub(@ModelAttribute SubVO vo, Model model, HttpServletRequest request) throws IOException {
-		// 구독-insert / 수정-update 분기 처리
-//		if (StringValues.equals("수정")) {
-//		return "updateSubTree.do";
-//	}
-		
     	// 구독 구분을 위해 세션에서 멤버 객체 뽑아오기
     	HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		// 1인 1구독 체크
-		member.setMemberSub("1");
 		
 		treeService.insertSub(vo);
+		System.out.println("나무구독 신청");	
 		
+		// 1인 1구독 체크
+//		if(member != null) {	
+		member.setMemberSub("1");
     	memberService.memberSub(member);
-    	
-		System.out.println("컨트롤러-나무 구독 저장");
 		//ajax에 담아줄 data
+//		}
 		return "나무 구독이 신청되었습니다.";
-//		return "redirect:getSubTree.do"; // 구독 완료 후 보여줄 화면
 	}
-	
+
+	//수정
     @RequestMapping(value="/updateSubTree.do", produces="application/json; charset=utf8")
     @ResponseBody
     public String updateSub(SubVO vo) throws IOException{
@@ -64,24 +61,24 @@ public class TreeController {
 		/* return "redirect:getSubTree.do"; */
 	}
 	
+    //삭제
 	@RequestMapping("/deleteSubTree.do")
 	public String deleteSub(HttpServletRequest request) throws IOException{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		// 1인 1구독 체크 해제
-		if(member != null) {			
-			member.setMemberSub("0");
-			memberService.memberSub(member);
-			}
 		
 		SubVO vo = new SubVO();
 		vo.setSubUser(member.getMemberId());
 		System.out.println("현재 로그인 중인 멤버 아이디"+member.getMemberId());
-	
-		
 		treeService.deleteSub(vo);
+		// 1인 1구독 체크 해제
+//		if(member != null) {			
+		member.setMemberSub("0");
+//			}
+		memberService.memberSub(member);
 		// 구독 삭제 후 페이지(구독 창 없는 마이페이지?)
 		//return "mypage";
+		
 		return "redirect:mypage.do";
 	}
 	
@@ -101,13 +98,12 @@ public class TreeController {
 //		for(SubTeaVO tea : list) {
 //			System.out.println(tea.toString());
 //		}
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
 //		MemberVO member = (MemberVO)session.getAttribute("member");	
 		// "member"은 나중에 필요시 "user"로 바꿔서 넘겨줘도 ok
 		model.addAttribute("teaList", list);
 //		model.addAttribute("member", member);
-//		System.out.println("현재 로그인 중인 멤버 아이디"+(member.getMemberId()));
-		
+//		System.out.println("현재 로그인 중인 멤버 아이디"+(member.getMemberId()));	
 		return "subscribe_tree";
 	}
 

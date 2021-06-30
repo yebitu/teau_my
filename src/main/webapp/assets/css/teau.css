@@ -147,12 +147,22 @@
   
 }
 
-.tt_goods .tt_explain {
+/* 설명 출력 */
+ p.tt_explain {
   font-size: 15px;
-  color: #aaa;
+  color: #fff;
   /* display: none; */
   /* visibility: hidden; */
 }
+
+#sub_tree ul>li:hover
+p.tt_explain {
+  font-size: 15px;
+  color: #aaa;
+  /* display: block; */
+  /* visibility:visible; */
+}
+
 /* 모바일 작은화면  */
 @media screen and (max-width: 600px) {
   
