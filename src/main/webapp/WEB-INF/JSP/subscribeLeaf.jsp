@@ -272,6 +272,7 @@
 			if(data == null){
 				if(subCheck == 1) {
 					alert("이미 구독 중인 상품이 있습니다.")
+					location.href="index.jsp"
 				} else {					
 				let insert = 'insertSubLeaf.do';
 				checkbox_Check(insert);

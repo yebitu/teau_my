@@ -48,9 +48,11 @@ public class SubController {
 		// 구독 선택창
 		@RequestMapping("/subscribe_seed.do")
 		public String seed(HttpServletRequest request, Model model) {
-			HttpSession session = request.getSession();
-			MemberVO member = (MemberVO)session.getAttribute("member");
-			model.addAttribute("member", member);
+			/*
+			 * HttpSession session = request.getSession(); MemberVO member =
+			 * (MemberVO)session.getAttribute("member"); model.addAttribute("member",
+			 * member);
+			 */
 			return "subscribe_seed";
 		}
 		
@@ -80,9 +82,9 @@ public class SubController {
 		//구독선택창 > jsp에서 함수로 처리
 		@RequestMapping("/subscribe_leaf.do")
 		public String leaf(HttpServletRequest request, Model model) {
-			HttpSession session = request.getSession();
-			MemberVO member = (MemberVO)session.getAttribute("member");
-			model.addAttribute("member", member);
+//			HttpSession session = request.getSession();
+//			MemberVO member = (MemberVO)session.getAttribute("member");
+//			model.addAttribute("member", member);
 			return "subscribe_leaf";
 		}
 	

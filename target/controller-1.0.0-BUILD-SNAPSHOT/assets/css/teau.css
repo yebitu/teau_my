@@ -151,7 +151,7 @@
  p.tt_explain {
   font-size: 15px;
   color: #fff;
-  display: none;
+  /* display: none; */
   /* visibility: hidden; */
 }
 
@@ -159,7 +159,7 @@
 p.tt_explain {
   font-size: 15px;
   color: #aaa;
-  display: block;
+  /* display: block; */
   /* visibility:visible; */
 }
 

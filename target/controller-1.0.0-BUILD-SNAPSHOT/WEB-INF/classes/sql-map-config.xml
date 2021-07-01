@@ -18,6 +18,7 @@
 		<typeAlias type="com.teau.biz.board.ReplyVO" alias="reply"></typeAlias>
 		<typeAlias type="com.teau.biz.member.MemberVO" alias="member"></typeAlias>
 		<typeAlias type="com.teau.biz.admin.AdminVO" alias="admin"></typeAlias>
+		<typeAlias type="com.teau.biz.shop.ShopVO" alias="shop"/>
  		
  	</typeAliases>
 	
@@ -28,6 +29,7 @@
 		<mapper resource="mappings/member-mapping.xml" />
 		<mapper resource="mappings/admin-mapping.xml" />
 		<mapper resource="mappings/subscribe-mapping.xml" />
+		<mapper resource="mappings/shop-mapping.xml"/>
 	</mappers>
 </configuration>
 

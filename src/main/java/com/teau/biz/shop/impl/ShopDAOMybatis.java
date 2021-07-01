@@ -16,11 +16,16 @@ public class ShopDAOMybatis {
 	public void insertShop(ShopVO vo) {
 		System.out.println("마이바티스DAO로 상품추가기능 처리");
 		mybatis.insert("ShopDAO.insertShop", vo);
+		// 테스트
+		System.out.println(vo.getTeaName());
 	}
 	
 	public void updateShop(ShopVO vo) {
 		System.out.println("마이바티스DAO로 상품업데이트기능 처리");
 		mybatis.update("ShopDAO.updateShop", vo);
+		//테스트
+		System.out.println(vo.getTeaId());
+		System.out.println(vo.getTeaName());
 	}
 	
 	public void deleteShop(ShopVO vo) {
@@ -33,7 +38,7 @@ public class ShopDAOMybatis {
 		return (ShopVO)mybatis.selectOne("ShopDAO.getShop", vo);
 	}
 	
-	public List<ShopVO> getListShop(){
+	public List<ShopVO> getShopList(){
 		System.out.println("마이바티스DAO로 상품목록보기기능 처리");
 		return mybatis.selectList("ShopDAO.getShopList");
 	}

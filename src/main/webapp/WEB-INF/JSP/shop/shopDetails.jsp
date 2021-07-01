@@ -1,31 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<% String teaId = request.getParameter("teaId"); %>
 
 <!doctype html>
 <html lang="en">
 
 <!-- Ajax  -->
 <script>
-	function selectTeaDetail(){
-		let teaID = <%=teaId%>;
-	}
-	
-	$.ajax({
-		type: 'POST',
-		url: ,
-		dataType: ,
-		data:,
-		success: function(data){
-			
-		},
-		error: function(e) {
-			console.log(e);
-		}
-	
-				
-	});
-}
+
 
 </script>
 
@@ -96,7 +79,7 @@
 			<section class="details_section shop_details sec_ptb_120 bg_default_gray" style="padding-top: 50px;">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-10" style="text-align: right; margin-bottom: 50px;">
-					<a class="btn btn_primary text-uppercase" href="shop_update.html">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="btn btn_primary text-uppercase" href="shopUpdate.do">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a class="btn btn_primary text-uppercase" href="#" id="removefrm" onclick='removeCheck()'>상품 삭제</a>
 				</div>
 				<div class="col-lg-2"></div>
@@ -107,44 +90,44 @@
 							<div class="details_image_wrap wow fadeInUp" data-wow-delay=".1s">
 								<div class="details_image_carousel">
 									<div class="slider_item">
-										<img src="assets/images/shop/img_01.png" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId }_00.png" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/img_02.png" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId }_01.png" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/img_03.png" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId }_02.png" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/img_04.png" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId }_03.png" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/img_05.png" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId }_00.png" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/img_06.png" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId }_01.png" alt="image_not_found">
 									</div>
 
 								</div>
 
 								<div class="details_image_carousel_nav">
 									<div class="slider_item">
-										<img src="assets/images/shop/${shop.teaId}_0.jpg" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId}_0.jpg" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/${shop.teaId}_1.jpg" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId}_1.jpg" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/${shop.teaId}_2.jpg" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId}_2.jpg" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/${shop.teaId}_3.jpg" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId}_3.jpg" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/${shop.teaId}_0.jpg" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId}_0.jpg" alt="image_not_found">
 									</div>
 									<div class="slider_item">
-										<img src="assets/images/shop/${shop.teaId}_1.jpg" alt="image_not_found">
+										<img src="assets/images/shop/${tea.teaId}_1.jpg" alt="image_not_found">
 									</div>
 								</div>
 							</div>
@@ -153,14 +136,14 @@
 						<div class="col-lg-6 col-md-7">
 							<div class="details_content wow fadeInUp" data-wow-delay=".2s">
 								<div class="details_flex_title">
-									<h2 class="details_title text-uppercase">${shop.teaName}</h2>
+									<h2 class="details_title text-uppercase">${tea.teaName}</h2>
 								</div>
 								<p>
-									${shop.teaInfo}
+									${tea.teaInfo}
 								</p>
 								<div class="details_price">
-								<input type="text" id="teaPrice" name="teaPrice" class="price_text" value="${shop.teaPrice}" readonly/>
-									<strong class="price_text">${shop.teaPrice}</strong>
+								<input type="hidden" id="teaPrice" name="teaPrice" class="price_text" value="${tea.teaPrice}" readonly/>
+									<strong class="price_text">${tea.teaPrice}원</strong>
 								</div>
 								<div>
 
@@ -168,7 +151,7 @@
 								<ul class="btns_group ul_li">
 									<li>
 										<div class="quantity_input quantity_boxed">
-											<h4 class="quantity_title text-uppercase">Quantity</h4>
+											<h4 class="quantity_title text-uppercase">수량</h4>
 											<form action="#">
 												<button type="button" class="input_number_decrement">–</button>
 												<input class="input_number" type="text" value="1">
@@ -209,7 +192,7 @@
 					</div>
 					
 					<!-- 추천 상품 : 알고리즘 필요? -->
-					<div class="related_products">
+<%-- 					<div class="related_products">
 						<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">추천상품</h4>
 						<div class="row">
 						
@@ -269,7 +252,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> --%>
 						</div>
 					</div>
 

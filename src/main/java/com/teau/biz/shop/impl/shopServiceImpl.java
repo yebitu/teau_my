@@ -9,12 +9,12 @@ import com.teau.biz.shop.ShopService;
 import com.teau.biz.shop.ShopVO;
 
 @Service("shopService")
-public class shopServiceImpl implements ShopService {
+public class ShopServiceImpl implements ShopService {
 	@Autowired
 	private ShopDAOMybatis ShopDAO;
 	
 	//초기화
-	public shopServiceImpl() {
+	public ShopServiceImpl() {
 		
 	}
 	
@@ -41,8 +41,8 @@ public class shopServiceImpl implements ShopService {
 	}
 
 	
-	public List<ShopVO> getListShop() {
-		return ShopDAO.getListShop();
+	public List<ShopVO> getShopList() {
+		return ShopDAO.getShopList();
 	}
 
 }

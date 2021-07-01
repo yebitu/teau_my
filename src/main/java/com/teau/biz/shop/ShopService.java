@@ -12,6 +12,6 @@ public interface ShopService {
 	
 	ShopVO getShop(ShopVO vo);
 	
-	List<ShopVO> getListShop();
+	List<ShopVO> getShopList();
 
 }

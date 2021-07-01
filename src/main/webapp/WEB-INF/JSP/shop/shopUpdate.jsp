@@ -40,6 +40,7 @@
     </style>
 </head>
 
+
 <body>
 
 <jsp:include page="../header.jsp"/>
@@ -60,7 +61,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="form_item">
-                                        <h1>추가할 상품의 정보를 적어주세요.</h1>
+                                        <h1>수정할 상품의 정보를 적어주세요.</h1>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -78,15 +79,7 @@
                             <div class="form_item">
                                 <input type="text" name="price" placeholder="차 가격을 적어주세요">
                             </div>
-                            <div class="form_item">
-                                <input type="text" name="DB 보고 결정" placeholder="DB 보고 결정 ">
-                            </div>
-                            <div class="form_item">
-                                <input type="text" name="DB 보고 결정2" placeholder="DB 보고 결정2">
-                            </div>
-                            <div class="form_item">
-                                <input type="text" name="DB 보고 결정3" placeholder="DB 보고 결정3">
-                            </div>
+                           
 
 
                             
@@ -122,7 +115,6 @@
         </main>
         <!-- main body - end
       ================================================== -->
-
 
 		<!-- footer_section - start
          ================================================== -->

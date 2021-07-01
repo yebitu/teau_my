@@ -99,8 +99,10 @@
                                 href="boardViewer.do?boardId=${board.boardId }&boardImgm=${board.boardImgm}">${board.boardTitle}
                               
                                 <c:if test="${board.replyCount ne 0}">
-								<small><b>[&nbsp;<c:out value="${board.replyCount}"/>&nbsp;]</b></small>
-								</c:if>
+                                  <small><b>[&nbsp;
+                                      <c:out value="${board.replyCount}" />&nbsp;]
+                                    </b></small>
+                                </c:if>
                                 
                                 </a></h2>
                             <ul class="post_meta ul_li wow fadeInUp" data-wow-delay=".1s">
@@ -121,8 +123,9 @@
                       
                         <div class="col text-center">
 
-                           <c:if test="${member.memberId == null }">
-                            <a class="btn btn_primary text-uppercase" href="login.do"  style="float: right; margin-top: 2.5%;">글쓰기</a>
+                          <c:if test="${member.memberId == null }">
+                            <a class="btn btn_primary text-uppercase" href="login.do"
+                              style="float: right; margin-top: 2.5%;">글쓰기</a>
                           </c:if>
                           <c:if test="${member.memberId != null }">
                             <a class="btn btn_primary text-uppercase" href="boardCreateMove.do?boardCate=1"

@@ -16,7 +16,9 @@
    	$(document).ready(function(){
   		getMemberInfo();
   		/* logText(); */
-  		console.log(id);
+  		if(id != null ){
+  		console.log(id);  			
+  		}
   		
   		
   	});
@@ -98,9 +100,9 @@
                           shop
                         </a>
                         <ul class="submenu dropdown-menu" aria-labelledby="portfolio_submenu">
-                          <li><a href="shop.do">#계절별</a></li>
-                          <li><a href="shop2.do">#사용자별</a></li>
-                          <li><a href="shop3.do">#디카페인</a></li>
+                          <li><a href="shopSeason.do">#계절</a></li>
+                          <li><a href="shopUser.do">#사용자</a></li>
+                          <li><a href="shopBase.do">#베이스</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">

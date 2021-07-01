@@ -100,9 +100,9 @@
                           shop
                         </a>
                         <ul class="submenu dropdown-menu" aria-labelledby="portfolio_submenu">
-                          <li><a href="shopseason.do">#계절</a></li>
-                          <li><a href="shopuser.do">#사용자</a></li>
-                          <li><a href="shopbase.do">#베이스</a></li>
+                          <li><a href="shopSeason.do">#계절</a></li>
+                          <li><a href="shopUser.do">#사용자</a></li>
+                          <li><a href="shopBase.do">#베이스</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">

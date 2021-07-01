@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-        <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-            <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
             <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
                 <!doctype html>
                 <html lang="en">
@@ -45,7 +45,36 @@
                         }
                     </style>
                     <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
 
+                        });
+
+                        function nullvaluealert() {
+                            if (!document.create.boardTitle.value || document.create.boardTitle.value.trim() == "") {
+                                alert("글 제목을 입력하세요");
+
+                                return false;
+                            }
+                            if (!document.create.boardContent.value || document.create.boardContent.value.trim() == "") {
+                                alert("글 내용을 입력하세요");
+
+                                return false;
+                            }
+
+
+                        }
+
+                        $("#uploadFile").change(function () {
+                            if (this.files && this.files[0]) {
+                                var reader = new FileReader;
+                                reader.onload = function (data) {
+                                    $(".select_img img").attr("src", data.target.result).width(500);
+                                }
+                                reader.readAsDataURL(this.files[0]);
+                            }
+                        });
+                    </script>
                 </head>
 
 
@@ -57,8 +86,8 @@
 
 
 
-                        <form action="boardCreate.do" method="post" enctype="multipart/form-data"
-                            >
+                        <form name="create" action="boardCreate.do" method="post" enctype="multipart/form-data"
+                            onsubmit="return nullvaluealert()">
                             <section class="contact_section sec_ptb_120 bg_default_gray">
                                 <div class="container">
                                     <div class="contact_form bg_white wow fadeInUp" style="margin-top: 100px;"
@@ -88,7 +117,8 @@
                                             <input type="text" name="boardTitle" placeholder="제목을 입력해주세요">
                                         </div>
                                         <div class="form_item">
-                                            <input type="text" name="boardWriter" placeholder="사람을 입력해주세요" value="${member.memberId}" readonly>
+                                            <input type="text" name="boardWriter" placeholder="사람을 입력해주세요"
+                                                value="${member.memberId}" readonly>
                                         </div>
                                         <div class="form_item">
                                             <textarea name="boardContent" placeholder="내용을 입력해주세요 :"></textarea>
@@ -100,18 +130,7 @@
                                             <input type="file" id="uploadFile" name="uploadFile" />
                                             <div class="select_img"><img src="" /></div>
 
-                                            <script>
-                                                $("#uploadFile").change(function () {
-                                                    if (this.files && this.files[0]) {
-                                                        var reader = new FileReader;
-                                                        reader.onload = function (data) {
-                                                            $(".select_img img").attr("src", data.target.result).width(500);
-                                                        }
-                                                        reader.readAsDataURL(this.files[0]);
-                                                    }
-                                                });
-                                            </script>
-                                            <%-- <%=request.getRealPath(" /") %> --%>
+
                                         </div>
 
                                         <!-- <div class="file1">
