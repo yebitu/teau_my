@@ -104,7 +104,7 @@ public class TreeController {
 		model.addAttribute("teaList", list);
 //		model.addAttribute("member", member);
 //		System.out.println("현재 로그인 중인 멤버 아이디"+(member.getMemberId()));	
-		return "subscribe_tree";
+		return "sub/subscribe_tree";
 	}
 
 	

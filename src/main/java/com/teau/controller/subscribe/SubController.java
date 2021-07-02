@@ -38,22 +38,21 @@ public class SubController {
 	private TreeServiceImpl treeService;
 	
 	// 구독메인
-	@RequestMapping("/subscribe_main.do")
+	@RequestMapping("/subscribeMain.do")
 	public String main() {
-		
-		return "subscribe_main";
+		return "sub/subscribeMain";
 	}
 	
 	// 씨앗 구독
 		// 구독 선택창
-		@RequestMapping("/subscribe_seed.do")
+		@RequestMapping("/subscribeSeed.do")
 		public String seed(HttpServletRequest request, Model model) {
 			/*
 			 * HttpSession session = request.getSession(); MemberVO member =
 			 * (MemberVO)session.getAttribute("member"); model.addAttribute("member",
 			 * member);
 			 */
-			return "subscribe_seed";
+			return "sub/subscribeSeed";
 		}
 		
 		// 씨앗구독 수정
@@ -80,12 +79,12 @@ public class SubController {
 
     // 새싹구독
 		//구독선택창 > jsp에서 함수로 처리
-		@RequestMapping("/subscribe_leaf.do")
+		@RequestMapping("/subscribeLeaf.do")
 		public String leaf(HttpServletRequest request, Model model) {
 //			HttpSession session = request.getSession();
 //			MemberVO member = (MemberVO)session.getAttribute("member");
 //			model.addAttribute("member", member);
-			return "subscribe_leaf";
+			return "sub/subscribeLeaf";
 		}
 	
 	
@@ -113,19 +112,9 @@ public class SubController {
 
 	
 	// 나무구독
-	@RequestMapping("/subscribe_tree.do")
+	@RequestMapping("/subscribeTree.do")
 	public String tree() {		
-//		HttpSession session = request.getSession();
-//		MemberVO member = (MemberVO)session.getAttribute("member");	
-//		// "member"은 나중에 필요시 "user"로 바꿔서 넘겨줘도 ok
-//		model.addAttribute("member", member);		
-//		System.out.println(teaList);
-//		
-//		for(SubTeaVO tea : teaList) {
-//			System.out.println(tea.toString());
-//		}
-//		model.addAttribute("teaList", treeService.getTeaList());
-//		return "WEB-INF/JSP/subscribe_tree.jsp";
+
 		// getTeaList에서 세션의 User 객체 뽑아온다 
 		return "forward:getTeaList.do";
 	}

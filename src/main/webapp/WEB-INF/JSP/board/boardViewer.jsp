@@ -112,7 +112,7 @@
             </head>
 
             <body>
-              <%@include file="header.jsp" %>
+              <%@include file="../header.jsp" %>
 
                 <!-- details_section - start
         ================================================== -->
@@ -253,7 +253,7 @@
                 </main>
                 <!-- main body - end
       ================================================== -->
-                <%@include file="footer.jsp" %>
+                <%@include file="../footer.jsp" %>
 
             </body>
 

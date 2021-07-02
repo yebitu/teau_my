@@ -142,7 +142,7 @@ public class BoardController {
         model.addAttribute("reply", reply);
 
         System.out.println("글 상세글본다고");
-        return "boardViewer";
+        return "board/boardViewer";
     }
 
     // 글 상세 조회
@@ -171,7 +171,7 @@ public class BoardController {
         // Model 정보 저장
         model.addAttribute("paging", new PageMaker(vo, total));
         model.addAttribute("boardListO", boardService.getBoardListO(vo));
-        return "toBoard";
+        return "board/toBoard";
     }
 
     // 새싹 목록 조회
@@ -183,7 +183,7 @@ public class BoardController {
         // Model 정보 저장
         model.addAttribute("pagingB", new PageMakerB(vo, total));
         model.addAttribute("boardListB", boardService.getBoardListB(vo));
-        return "tbBoard";
+        return "board/tbBoard";
     }
     
 
@@ -224,7 +224,7 @@ public class BoardController {
     public String getBoard(RBoardVO vo, Model model) {
         System.out.println("글 상세 조회 처리");
         model.addAttribute("board", boardService.getBoard(vo));
-        return "getBoard";
+        return "board/getBoard";
     }
 
     // 랭킹 글 리스트 보기
@@ -232,7 +232,7 @@ public class BoardController {
     public String getBoardListR(RBoardVO vo, Model model) {
         System.out.println("글 리스트 처리");
         model.addAttribute("boardListR", boardService.getBoardListR(vo));
-        return "rankBoard";
+        return "board/rankBoard";
     }
 
 }

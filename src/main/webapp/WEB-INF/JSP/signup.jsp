@@ -35,7 +35,7 @@
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
   <main>
 
       <!-- cart_sidebar - start
@@ -145,6 +145,6 @@
     </main>
     <!-- main body - end
       ================================================== -->
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="./footer.jsp"></jsp:include>
 </body>
 </html>

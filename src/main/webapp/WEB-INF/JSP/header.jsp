@@ -90,7 +90,7 @@
                   <div class="main_menu_inner collapse navbar-collapse" id="main_menu_dropdown">
                     <ul class="main_menu_list ul_li">
                       <li class="active dropdown">
-                        <a class="nav-link" href="subscribe_main.do" id="home_submenu">
+                        <a class="nav-link" href="subscribeMain.do" id="home_submenu">
                           Subscribe
                         </a>
                       </li>

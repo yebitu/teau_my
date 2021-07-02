@@ -77,7 +77,7 @@
 
 
                     <body>
-                        <%@include file="header.jsp" %>
+                        <%@include file="../header.jsp" %>
 
                             <!-- contact_section - start
         ================================================== -->
@@ -129,7 +129,7 @@
                             <!-- contact_section - end
         ================================================== -->
 
-                            <%@include file="footer.jsp" %>
+                            <%@include file="../footer.jsp" %>
                     </body>
 
                     </html>

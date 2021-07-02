@@ -50,7 +50,7 @@
 
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="../header.jsp"></jsp:include>
 
 
 	<!-- breadcrumb_section - start
@@ -193,7 +193,7 @@
 	<!-- main body - end
       ================================================== -->
 
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="../footer.jsp"></jsp:include>
 
 	<script>
 		$(document).ready(function() {

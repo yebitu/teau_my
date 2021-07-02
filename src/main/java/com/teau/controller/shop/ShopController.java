@@ -20,16 +20,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teau.biz.shop.ShopService;
 import com.teau.biz.shop.ShopVO;
+import com.teau.biz.subscribe.SubVO;
 
 @Controller
 public class ShopController {
 	@Autowired
-	ShopService shopServie;
+	ShopService shopService;
 	
 	// 1번 쇼핑몰 상품리스트 조회
 	@RequestMapping("/shopSeason.do")
 	public String shopSeason(Model model) {
-		List<ShopVO> shopList = shopServie.getShopList();
+		List<ShopVO> shopList = shopService.getShopList();
 		System.out.println("계절 상품 리스트 조회");
 		model.addAttribute("shopList", shopList);
 		return "shop/shopSeason";
@@ -39,7 +40,7 @@ public class ShopController {
 	@RequestMapping("/shopUser.do")
 	public String shopUser(Model model) {
 		System.out.println("대상별 상품 리스트 조회");
-		model.addAttribute("shopList", shopServie.getShopList());
+		model.addAttribute("shopList", shopService.getShopList());
 		return "shop/shopUser";
 	}
 	
@@ -47,7 +48,7 @@ public class ShopController {
 	@RequestMapping("/shopBase.do")
 	public String shopBase(Model model) {
 		System.out.println("차종류별 상품 리스트 조회");
-		model.addAttribute("shopList", shopServie.getShopList());
+		model.addAttribute("shopList", shopService.getShopList());
 		return "shop/shopBase";
 	}
 	
@@ -83,7 +84,7 @@ public class ShopController {
 			/* } */		
 			
 		System.out.println("글 등록 처리");
-		shopServie.insertShop(vo);
+		shopService.insertShop(vo);
 		return "redirect:shopSeason.do";
 	}
 	
@@ -94,7 +95,7 @@ public class ShopController {
 	@RequestMapping("/shopDetails.do")
 	public String getShop(ShopVO vo, Model model, @RequestParam("teaId") int teaId) throws IOException{
 	System.out.println(teaId); // 리퀘스트파람 없어도 돌아감
-	ShopVO tea = shopServie.getShop(vo);
+	ShopVO tea = shopService.getShop(vo);
 	model.addAttribute("tea", tea);
 	System.out.println("상품 상세보기 페이지-상품명: "+tea.getTeaName());
 	return "shop/shopDetails";
@@ -120,14 +121,55 @@ public class ShopController {
 	 * }
 	 */
 	
-	// 상품 수정
-	
-	@RequestMapping("/shopUpdate.do")
-	public String shopUpdate(ShopVO vo) {
-		return null;
+	// 상품 수정 페이지 이동
+	@RequestMapping("/updateShopView.do")
+	public String updateView(ShopVO vo, Model model) {
+		return "shop/shopUpdate";
 	}
 	
+	// 상품 수정(ajax)
+		// shopAdmin.jsp에서 updateJson()함수로 보낸 값을  맵과 해시맵을 사용해 매핑, 제이슨으로 변환
+	@RequestMapping(value="/updateLoad.do", produces="application/text; charset=utf8")
+	@ResponseBody
+	public String updateLoad(@RequestParam Map<String, String> paramMap) throws JsonProcessingException{
+		ShopVO tea = new ShopVO();
+		tea.setTeaId(Integer.parseInt(paramMap.get("teaId")));
+		
+		ShopVO teaInDB = shopService.getShop(tea);
+		
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("teaInDB", teaInDB);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashMap);
+		return json;
+	}
+	
+		//
+	@RequestMapping(value="/updateShop.do", produces="application/json; charset=utf8")
+	@ResponseBody
+	public String updateShop(ShopVO vo) throws JsonProcessingException {
+		shopService.updateShop(vo);		
+		return "상품이 수정 되었습니다";
+//		return "redirect:shopDetails.do?teaId="+teaId;
+	}
+	
+	// 상품 수정(ajax 사용  하기 전)
+//	@RequestMapping("/updateShop.do")
+//	public String updateShop(ShopVO vo) throws IOException {
+//		int teaId = vo.getTeaId();
+//		// vo.setTeaId(teaId); 이렇게 아이디값을 받아서 객체에 세팅해줄 필요 없음! 이미 값을 다 갖고 들어옴
+//		shopService.updateShop(vo);
+//		System.out.println("상품이 수정 되었습니다");
+//		return "redirect:shopDetails.do?teaId="+teaId;
+//	}
+	
 	// 상품 삭제
+	@RequestMapping("/deleteShop.do")
+	public String deleteShop(ShopVO vo) {
+		System.out.println("상품이 삭제되었습니다");
+		shopService.deleteShop(vo);
+		return "redirect:shopSeason.do";
+	}
 	
 	
 	//

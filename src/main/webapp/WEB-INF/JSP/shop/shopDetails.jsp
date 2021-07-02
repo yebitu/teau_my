@@ -9,6 +9,15 @@
 <!-- Ajax  -->
 <script>
 
+function removeCheck(){
+	let removeCheck = confirm("정말로 삭제하시겠습니까?");
+	if(removeCheck) {
+	alert("삭제되었습니다");
+	location.href= "deleteShop.do?teaId=${tea.teaId }";
+		
+	}
+	else alert("삭제가 취소되었습니다");
+}
 
 </script>
 
@@ -57,7 +66,7 @@
 				<div class="container">
 					<h1 class="page_title text-black wow fadeInUp" data-wow-delay=".1s">상품 상세보기</h1>
 					<ul class="breadcrumb_nav ul_li wow fadeInUp" data-wow-delay=".2s">
-						<li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+						<li><a href="index.jsp"><i class="fas fa-home"></i> Home</a></li>
 						<li>상품 상세보기</li>
 					</ul>
 				</div>
@@ -79,12 +88,14 @@
 			<section class="details_section shop_details sec_ptb_120 bg_default_gray" style="padding-top: 50px;">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-10" style="text-align: right; margin-bottom: 50px;">
-					<a class="btn btn_primary text-uppercase" href="shopUpdate.do">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="btn btn_primary text-uppercase" href="#" id="removefrm" onclick='removeCheck()'>상품 삭제</a>
+<!-- 					<a class="btn btn_primary text-uppercase" href="updateShopView.do?teaId=${tea.teaId }">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+					<a class="btn btn_primary text-uppercase" id="update" onclick="updateJson();">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="btn btn_primary text-uppercase" id="removefrm" onclick='removeCheck()'>상품 삭제</a>
 				</div>
 				<div class="col-lg-2"></div>
 				<div class="container">
-
+				<form method="POST">
+				<input type="hidden" id="teaId" name="teaId" value="${tea.teaId}" >
 					<div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
 						<div class="col-lg-6 col-md-7">
 							<div class="details_image_wrap wow fadeInUp" data-wow-delay=".1s">
@@ -135,6 +146,7 @@
 
 						<div class="col-lg-6 col-md-7">
 							<div class="details_content wow fadeInUp" data-wow-delay=".2s">
+							
 								<div class="details_flex_title">
 									<h2 class="details_title text-uppercase">${tea.teaName}</h2>
 								</div>
@@ -148,6 +160,7 @@
 								<div>
 
 								</div>
+								</form>
 								<ul class="btns_group ul_li">
 									<li>
 										<div class="quantity_input quantity_boxed">
@@ -268,6 +281,31 @@
 		<!-- footer_section - start
          ================================================== -->
 <jsp:include page="../footer.jsp"/>
+<script type="text/javascript">
+
+	function updateJson(){
+		let teaId = $('#teaId').val();
+		/* let teaId = ${tea.teaId}; */
+		
+		$.ajax({	
+		type: 'POST',
+		url: 'updateLoad.do', //데이터를 보낼 주소
+		dataType: 'text',
+		data: {'teaId' : teaId}, //보낼 데이터
+		
+		success: function(data){
+			console.log(data);
+			//컨트롤러가 보내준 data(유저의 선택 정보=json)을  URL로 테우기 위해 문자열(스트링)로 변환한다
+			window.location.href=("updateShopView.do?data="+encodeURIComponent(JSON.stringify(data)));
+		},
+		error: function(e){
+			console.log(e);
+		}
+		});
+		
+	}
+	
+</script>
 
 </body>
 

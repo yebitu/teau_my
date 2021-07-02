@@ -372,7 +372,7 @@ function updateJson(param){
 			
 			success:function(data){
 				console.log(data);
-				//서버가 보내준 data(유저의 선택)을 JSON 문자열(스트링)로 변환한다
+				//서버가 보내준 data(유저의 선택-json형태)을  URL로 테우기 위해 문자열(스트링)로 변환한다
 				window.location.href=("subscribe_"+ param +".do?data="+encodeURIComponent(JSON.stringify(data)));		
 			},
 			error: function(e){

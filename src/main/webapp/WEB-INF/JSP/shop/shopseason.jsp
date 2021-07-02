@@ -81,11 +81,11 @@
 					<!-- 탭-태그 -->
 					<ul class="filters-button-group style_4 ul_li_center wow fadeInUp" data-wow-delay=".1s"
 						style="margin: 0;">
-						<li><button class="button text-uppercase active" data-filter="*">all</button></li>
-						<li><button class="button text-uppercase" data-filter=".spring">봄</button></li>
-						<li><button class="button text-uppercase" data-filter=".summer">여름</button></li>
-						<li><button class="button text-uppercase" data-filter=".fall">가을</button></li>
-						<li><button class="button text-uppercase" data-filter=".winter">겨울</button></li>
+						<li><button class="button text-uppercase active" id="btnAll" data-filter="*">all</button></li>
+						<li><button class="button text-uppercase" id="btnSpring" data-filter=".spring">봄</button></li>
+						<li><button class="button text-uppercase" id="btnSummer" data-filter=".summer">여름</button></li>
+						<li><button class="button text-uppercase" id="btnFall" data-filter=".fall">가을</button></li>
+						<li><button class="button text-uppercase" id="btnWinter" data-filter=".winter">겨울</button></li>
 					</ul>
 					<!-- 관리자 로그인 시에만 보임 -->
 					<%-- <c:if test="${member.memberRole == 1}"> --%>
@@ -106,9 +106,40 @@
 
 					<!-- 상품목록 -->
 					<div class="wrap" style="padding: 1%; ">
-						<div class="related_products" >
+						<div class="related_products" id="allPage">
+						
+							<div class="row allTea" id="allTea">
+							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s"></h4>
+							<c:forEach items="${shopList }" var="tea">
+								<div class="col-lg-3 col-md-6 col-sm-6" ">
+									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
+										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
+										<a class="item_image" href="shopDetails.do?teaId=${tea.teaId }">
+											<img src="assets/images/shop/${tea.teaImg}_0.png alt="image_not_found">
+										</a>
+										<div class="item_content">
+											<h3 class="item_title text-uppercase" style="text-align:right">
+												<a href="shopDetails.do?teaId=${tea.teaId }">${tea.teaName}
+											</h3>
+											<h5>${tea.tagSeason }</h5>
+											<!-- <div class="btns_group" style="text-align:right">
+                                                   <a class="item_price bg_default_brown">구매하기</a>
+                                                   <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
+                                                </div> -->
+											<div>
+												<p class="" style="font-size: 1rem; color:
+                                                    black; font-weight: bold">${tea.teaPrice}원</p></a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</c:forEach>
+							</div>
+							</div>
 							
-							<div class="row" data-cat=".spring">
+							
+							<div class="row" data-cat=".spring" id="spring">
 							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Spring</h4>
 
 							<c:forEach items="${shopList }" var="tea">
@@ -144,7 +175,7 @@
 
 						<!-- 2번째 -->
  						<div class="related_products">
-							<div class="row" data-cat=".summer">
+							<div class="row" data-cat=".summer" id="summer">
 							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Summer</h4>
 
 						<c:forEach items="${shopList }" var="tea">
@@ -180,7 +211,7 @@
 						
 						<!-- 3번째 -->
  						<div class="related_products">
-							<div class="row" data-cat=".fall">
+							<div class="row" data-cat=".fall" id="fall">
 							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Fall</h4>
 
 						<c:forEach items="${shopList }" var="tea">
@@ -216,7 +247,7 @@
 						
 						<!-- 4번째 -->
  						<div class="related_products">
-							<div class="row" data-cat=".winter">
+							<div class="row" data-cat=".winter" id="winter">
 							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Winter</h4>
 
 						<c:forEach items="${shopList }" var="tea">
@@ -275,6 +306,33 @@
 		<!-- footer_section - start
          ================================================== -->
 <jsp:include page="../footer.jsp"/>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#allTea').show();
+ 		$('#spring').hide();
+		$('#summer').hide();
+		$('#fall').hide();
+		$('#winter').hide(); 
+	})
+	
+	$('#btnSpring').click(function() {
+		$('#allTea').hide();
+		$('#spring').show();
+		$('#summer').hide();
+		$('#fall').hide();
+		$('#winter').hide();
+	})
+	
+	$('#allTea').click(function(){
+		$('#allTea').show();
+ 		$('#spring').hide();
+		$('#summer').hide();
+		$('#fall').hide();
+		$('#winter').hide(); 
+	}
+	
+</script>
 
 </body>
 

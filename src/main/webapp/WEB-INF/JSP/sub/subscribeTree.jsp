@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <% 
-	String data =  request.getParameter("data"); //data 를 String 으로 변환 
+	String data =  request.getParameter("data"); // data를 String으로 담기
 %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -66,7 +66,7 @@
 
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
     <!-- breadcrumb_section - start
         ================================================== -->
       <section class="breadcrumb_section text-uppercase"
@@ -252,7 +252,7 @@
       <!-- reserve_table_section - end
         ================================================== -->
     </main>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"></jsp:include>
 
 
 
@@ -316,7 +316,7 @@
     	  
     	  }
     	  
-    	  // 기존 선택된 상품에 체크표시
+    	  // 기존 선택된 상품에 css 표시
     	   $('input:checkbox:checked').each(function() {
 		      $(this).parents('li').addClass('selected');
 		      $(this).siblings('.tt_explain').css({"color": "#aaa"});
